@@ -85,8 +85,8 @@
                 <button id="playbutton">Play</button>
 		        <input id="color1input" type="color" onchange="setColor1()"></input>
 		        <input id="color2input" type="color" onchange="setColor2()"></input>
-		        <input id="gradientbutton" type="checkbox" onclick="toggleGradientColor();">Use Gradient</button>
-		        <input id="singlecolorbutton" type="checkbox" onclick="toggleSingleColor();">Use Single Color</button>
+		        <input id="gradientbutton" type="radio" onclick="toggleGradientColor();">Use Gradient</button>
+		        <input id="singlecolorbutton" type="radio" onclick="toggleSingleColor();">Use Single Color</button>
 		        <canvas id="screen" width="1080" height="720" style="border:1px solid #000000"></canvas>
 		        <script src="sv.js"></script>
             </div>
@@ -100,12 +100,6 @@
 
             <div class="s-about__block s-about__career">
 
-                <div class="row s-about__career-header">
-                    <div class="column lg-12">
-                        <h2 class="text-pretitle">Sorting Algorithms</h2>
-                    </div>
-                </div>
-
                 <div class="row s-about__timeline" data-animate-block>
                     <div class="column lg-6 stack-on-900 s-about__timeline-section" data-animate-el>
     
@@ -118,17 +112,17 @@
                             <div class="timeline__block">
                                 <div class="timeline__bullet"></div>
                                 <div class="timeline__header">
-                                    <h4 class="timeline__title">Insertion Sort</h3>
+                                    <h4 class="timeline__title">Insertion Sort</h4>
                                 </div>
                                 <div class="timeline__desc">
-                                    <p>Lorem ipsum Occaecat do esse ex et dolor culpa nisi ex in magna consectetur nisi cupidatat laboris esse eiusmod deserunt aute do quis velit esse sed Ut proident cupidatat nulla esse cillum laborum occaecat nostrud sit dolor incididunt amet est occaecat nisi.</p>
+                                    <p>You should be able to click on the heading for this sort to display it. [description of alg]</p>
                                 </div>
                             </div>
     
                             <div class="timeline__block">
                                 <div class="timeline__bullet"></div>
                                 <div class="timeline__header">
-                                    <h4 class="timeline__title">Dropbox</h4>
+                                    <h4 class="timeline__title">Quick Sort</h4>
                                 </div>
                                 <div class="timeline__desc">
                                     <p>Lorem ipsum Occaecat do esse ex et dolor culpa nisi ex in magna consectetur nisi cupidatat laboris esse eiusmod deserunt aute do quis velit esse sed Ut proident cupidatat nulla esse cillum laborum occaecat nostrud sit dolor incididunt amet est occaecat nisi.</p>
@@ -142,7 +136,7 @@
                     <div class="column lg-6 stack-on-900 s-about__timeline-section" data-animate-el>
     
                         <h2 class="text-subtitle">
-                           
+                           This text makes the boxes even.
                         </h2> 
     
                         <div class="timeline">
@@ -150,7 +144,7 @@
                             <div class="timeline__block">
                                 <div class="timeline__bullet"></div>
                                 <div class="timeline__header">
-                                    <h4 class="timeline__title">University of Life</h3>
+                                    <h4 class="timeline__title">Selection Sort</h4>
                                 </div>
                                 <div class="timeline__desc">
                                     <p>Lorem ipsum Occaecat do esse ex et dolor culpa nisi ex in magna consectetur nisi cupidatat laboris esse eiusmod deserunt aute do quis velit esse sed Ut proident cupidatat nulla esse cillum laborum occaecat nostrud sit dolor incididunt amet est occaecat nisi.</p>
@@ -160,7 +154,7 @@
                             <div class="timeline__block">
                                 <div class="timeline__bullet"></div>
                                 <div class="timeline__header">
-                                    <h4 class="timeline__title">School of Cool Designers</h4>
+                                    <h4 class="timeline__title">Shell Sort</h4>
                                 </div>
                                 <div class="timeline__desc">
                                     <p>Lorem ipsum Occaecat do esse ex et dolor culpa nisi ex in magna consectetur nisi cupidatat laboris esse eiusmod deserunt aute do quis velit esse sed Ut proident cupidatat nulla esse cillum laborum occaecat nostrud sit dolor incididunt amet est occaecat nisi.</p>
@@ -179,7 +173,9 @@
 
         <section id="works" class="s-about">
             <p class="text-subtitle">Put something here?</p>
-            <img src="favicon.ico" width="25%" height="auto">
+            <span><img src="favicon.ico" width="25%" height="auto"></span>
+            <span><img src="guard_log.jpg" width="25%" height="auto"></span>
+
         </section> <!-- end section works -->
 
         <!-- # site footer
