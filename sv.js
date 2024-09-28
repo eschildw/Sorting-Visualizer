@@ -1,7 +1,7 @@
 // Data array
-var data;
+var data = [];
 // Swap array
-var randomizer_array;
+var randomizer_array = [];
 // How many iterations we should run in each call
 var steps;
 // How many iterations have been completed in total
@@ -25,9 +25,9 @@ function initalize() {
 	renderData();
 }
 // Creates the randomizer array
-//function createRandomizer(var size) {
+function createRandomizer(size) {
 	
-//}
+}
 
 
 // Sort array data, then randomize the data using the randomizer_array
@@ -35,7 +35,7 @@ function dataReset() {
 	
 }
 // Changes sorting algorithm
-function changeSort(var algorithm) {
+function changeSort(algorithm) {
 	current_sorting_function = algorithm;
 	dataReset();
 }
