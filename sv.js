@@ -168,15 +168,13 @@ function dataReset() {
 	//Will trigger quicksort reset
 	size = -1;
 	renderData();
-<<<<<<< Updated upstream
+	
 	clearInterval(step_interval)
 
 	mergeSort_isInitiated = shellSort_isInitialized = false;
-=======
 	if(step_interval) {
 		clearInterval(step_interval)
 	}
->>>>>>> Stashed changes
 }
 // Changes sorting algorithm
 function changeSort(algorithm) {
