@@ -4,7 +4,7 @@ var data_size = 0;
 // Swap array
 var randomizer_array = [];
 // How many iterations we should run in each call
-var steps = 1;
+var steps = 16;
 // How many iterations have been completed in total
 var steps_completed = 0;
 
@@ -18,13 +18,6 @@ var backaround_color = "white";
 
 initalize();
 
-var temp1 = document.getElementById('samplebutton');
-
-temp1.addEventListener('click', function() {
-	console.log("click");
-    step();
-}, false);
-
 // Initalizes all data
 function initalize() {
 	var canvas = document.getElementById("screen");
@@ -33,10 +26,22 @@ function initalize() {
 	
 	data_size = canvas.width;
 	
+	var temp1 = document.getElementById('stepbutton');
+
+	temp1.addEventListener('click', function() {
+		step();
+	}, false);
+
+	temp1 = document.getElementById('resetbutton');
+
+	temp1.addEventListener('click', function() {
+		dataReset();
+	}, false);
+	
+	
 	for(var i = 0; i < data_size;i++) {
 		data.push(data_size - i + 1);
 	}
-	
 	
 	renderData();
 }
