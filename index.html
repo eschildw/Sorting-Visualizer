@@ -10,6 +10,10 @@
 	<body>
 		<button id="stepbutton">Step</button>
 		<button id="resetbutton">Reset</button>
+		<input id="color1input" type="color" onchange="setColor1()"></input>
+		<input id="color2input" type="color" onchange="setColor2()"></input>
+		<input id="gradientbutton" type="checkbox" onclick="toggleGradientColor();">Use Gradient</button>
+		<input id="singlecolorbutton" type="checkbox" onclick="toggleSingleColor();">Use Single Color</button>
 		<canvas id="screen" width="1080" height="720" style="border:1px solid #000000"></canvas>
 		<script src="sv.js"></script>
 	</body>
