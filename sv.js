@@ -103,6 +103,34 @@ function selectionSort() {
 	}
 	steps_completed = steps_completed + steps;
 }
+
+function insertionSort() {
+    var temp;
+    let run_count = 0;
+    while (run_count < steps) {
+        let i = steps_completed;
+        while((i>0) && (data[i]<=data[i-1])) {
+            temp = data[i];
+            data[i] = data[i-1];
+            data[i-1] = temp;
+            i = i - 1;
+        }
+        steps_completed = steps_completed + 1
+        run_count = run_count + 1
+    }
+}
+
+function quickSort() {
+
+}
+
+function quickRecurse() {
+
+}
+
+function partition() {
+}
+
 // Clears the sorting screen
 function clearScreen() {
 	var canvas = document.getElementById("screen");
@@ -134,6 +162,10 @@ function step() {
 		case "selectionSort": {
 			selectionSort();
 			break;
+		}
+		case "insertionSort": {
+		    insertionSort();
+		    break;
 		}
 		default: {
 			break;
