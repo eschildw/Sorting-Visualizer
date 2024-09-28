@@ -31,6 +31,8 @@ var use_non_linear_gradiant = false;
 var use_linear_gradiant = false;
 var single_color = true;
 
+var step_interval;
+
 initalize();
 
 // Initalizes all data
@@ -166,13 +168,19 @@ function dataReset() {
 	//Will trigger quicksort reset
 	size = -1;
 	renderData();
+<<<<<<< Updated upstream
 	clearInterval(step_interval)
 
 	mergeSort_isInitiated = shellSort_isInitialized = false;
+=======
+	if(step_interval) {
+		clearInterval(step_interval)
+	}
+>>>>>>> Stashed changes
 }
 // Changes sorting algorithm
 function changeSort(algorithm) {
-	current_sorting_function = algorithm;
+	current_sorting_function = algorithm.name;
 	dataReset();
 }
 /* Sorting Algorithms */

@@ -3195,7 +3195,7 @@ img.u-pull-left {
  *
  * ------------------------------------------------------------------- */
 .s-intro {
-    padding-top : calc(9.5 * var(--space));
+    padding-top : calc(3.5 * var(--space));
     width       : 100%;
     position    : relative;
 }
