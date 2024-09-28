@@ -18,7 +18,7 @@ var steps_completed = 0;
 
 var is_sorted = false;
 // Current sorting algorithm
-var current_sorting_function = "selectionSort";
+var current_sorting_function = "shellSort";
 
 // Screen Variables
 var backaround_color = "white";
@@ -151,6 +151,46 @@ function insertionSort() {
     }
 }
 
+function swap(a, i, j) {
+	const temp = a[i];
+	a[i] = a[j];
+	a[j] = temp;
+}
+
+let gap, shellSort_isInitialized = false;
+let shellSort_i, shellSort_j;
+function shellSort() {
+	if (!shellSort_isInitialized) {
+		gap = Math.floor(data_size / 2);
+		shellSort_i = gap;
+		shellSort_isInitialized = true;
+	}
+
+	let swapsMade = 0;
+    while (gap > 0 && swapsMade < steps) {
+        if (shellSort_i < data.length) {
+            if (shellSort_j === undefined || shellSort_j < 0) {
+                shellSort_j = shellSort_i - gap;
+            }
+
+            // Continue comparing and swapping as needed
+            if (shellSort_j >= 0 && data[shellSort_j] > data[shellSort_j + gap]) {
+                swap(data, shellSort_j, shellSort_j + gap);
+                shellSort_j -= gap; // Move to the next element in the sublist
+                swapsMade++;
+            } else {
+                // Move to the next i when no more swaps can be done in this sublist
+                shellSort_i++;
+                shellSort_j = undefined;
+            }
+        } else {
+            // Move to the next gap size when we have finished the current gap
+            shellSort_i = gap = Math.floor(gap / 2);
+        }
+    }
+	steps_completed += swapsMade;
+}
+
 function quickSort() {
 
 }
@@ -197,6 +237,10 @@ function step() {
 		case "insertionSort": {
 		    insertionSort();
 		    break;
+		}
+		case "shellSort": {
+			shellSort();
+			break;
 		}
 		default: {
 			break;
