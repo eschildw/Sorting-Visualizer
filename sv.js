@@ -12,13 +12,13 @@ class Swap_Pair {
 
 var randomizer_array = [];
 // How many iterations we should run in each call
-var steps = 16;
+var steps = 1;
 // How many iterations have been completed in total
 var steps_completed = 0;
 
 var is_sorted = false;
 // Current sorting algorithm
-var current_sorting_function = "quickSort";
+var current_sorting_function = "selectionSort";
 
 
 // Screen Variables
@@ -51,7 +51,12 @@ function initalize() {
 	temp1.addEventListener('click', function() {
 		dataReset();
 	}, false);
-	
+
+	temp1 = document.getElementById('playbutton');
+	temp1.addEventListener('click', function() {
+		step_interval = setInterval(step,7)
+	}, false);
+
 	createRandomizer();
 	
 	for(var i = 0; i < data_size;i++) {
@@ -117,6 +122,7 @@ function dataReset() {
 	//Will trigger quicksort reset
 	size = -1;
 	renderData();
+	clearInterval(step_interval)
 }
 // Changes sorting algorithm
 function changeSort(algorithm) {
@@ -203,6 +209,7 @@ function shellSort() {
 	steps_completed += swapsMade;
 }
 
+//Quicksort based on this link: //https://stackoverflow.com/questions/68524038/is-there-a-python-implementation-of-quicksort-without-recursion
 var size = -1;
 var stack;
 var quick_top;
@@ -217,6 +224,7 @@ function quickSort() {
         quickSortIterative(data,0,canvas.width)
         i++;
     }
+    steps_completed = steps_completed + steps
 }
 
 function initializeQuickSort(l,h) {
@@ -233,7 +241,6 @@ function initializeQuickSort(l,h) {
     stack[quick_top] = h;
 }
 
-//https://stackoverflow.com/questions/68524038/is-there-a-python-implementation-of-quicksort-without-recursion
 function partition(arr,l,h) {
     var i = ( l - 1 );
     var x = arr[h];
@@ -366,6 +373,8 @@ function renderData() {
 	}	
 }
 
+
+//clear_interval = clearInterval(step)
 function step() {
 	switch(current_sorting_function) {
 		case "selectionSort": {
