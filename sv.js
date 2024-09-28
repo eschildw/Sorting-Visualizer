@@ -18,7 +18,8 @@ var steps_completed = 0;
 
 var is_sorted = false;
 // Current sorting algorithm
-var current_sorting_function = "shellSort";
+var current_sorting_function = "quickSort";
+
 
 // Screen Variables
 var backaround_color = "white";
@@ -105,6 +106,8 @@ function dataReset() {
 		data[pair.num1] = data[pair.num2];
 		data[pair.num2] = temp;
 	}
+	//Will trigger quicksort reset
+	size = -1;
 	renderData();
 }
 // Changes sorting algorithm
@@ -151,6 +154,7 @@ function insertionSort() {
     }
 }
 
+
 function swap(a, i, j) {
 	const temp = a[i];
 	a[i] = a[j];
@@ -191,15 +195,93 @@ function shellSort() {
 	steps_completed += swapsMade;
 }
 
+var size = -1;
+var stack;
+var quick_top;
+
 function quickSort() {
-
+    var canvas = document.getElementById("screen");
+    if (size == -1) {
+        initializeQuickSort(0,canvas.width)
+    }
+    let i = 0;
+    while (i<=steps) {
+        quickSortIterative(data,0,canvas.width)
+        i++;
+    }
 }
 
-function quickRecurse() {
-
+function initializeQuickSort(l,h) {
+    // Create an auxiliary stack
+    size = h - l + 1;
+    stack = new Array(size).fill(0);
+    quick_top = -1
+    // initialize quick_top of stack
+    //quick_top = -1;
+    // push initial values of l and h to stack
+    quick_top = quick_top + 1;
+    stack[quick_top] = l;
+    quick_top = quick_top + 1;
+    stack[quick_top] = h;
 }
 
-function partition() {
+//https://stackoverflow.com/questions/68524038/is-there-a-python-implementation-of-quicksort-without-recursion
+function partition(arr,l,h) {
+    var i = ( l - 1 );
+    var x = arr[h];
+    var temp;
+
+    for (let j = l; j < h; j ++) {
+        if (arr[j] <= x) {
+
+            // increment index of smaller element
+            i++;
+            temp = arr[i]
+            arr[i] = arr[j]
+            arr[j] = temp
+            }
+    }
+    temp = arr[i+1];
+    arr[i+1] = arr[h];
+    arr[h] = temp;
+    return (i+1);
+}
+
+// Function to do Quick sort
+// arr[] --> Array to be sorted,
+// l  --> Starting index,
+// h  --> Ending index
+function quickSortIterative(arr,l,h) {
+    // Keep popping from stack while is not empty
+    if (quick_top >= 0) {
+        // Pop h and l
+        h = stack[quick_top];
+        quick_top = quick_top - 1;
+        l = stack[quick_top];
+        quick_top = quick_top - 1;
+
+        // Set pivot element at its correct position in
+        // sorted array
+        p = partition( arr, l, h );
+
+        // If there are elements on left side of pivot,
+        // then push left side to stack
+        if (p-1 > l) {
+            quick_top = quick_top + 1;
+            stack[quick_top] = l;
+            quick_top = quick_top + 1;
+            stack[quick_top] = p - 1;
+        }
+
+        // If there are elements on right side of pivot,
+        // then push right side to stack
+        if (p+1 < h) {
+            quick_top = quick_top + 1;
+            stack[quick_top] = p + 1;
+            quick_top = quick_top + 1;
+            stack[quick_top] = h;
+        }
+    }
 }
 
 // Clears the sorting screen
@@ -241,6 +323,11 @@ function step() {
 		case "shellSort": {
 			shellSort();
 			break;
+        }
+		case "quickSort": {
+		    quickSort();
+		    break;
+
 		}
 		default: {
 			break;
