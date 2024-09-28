@@ -320,8 +320,6 @@ function renderData() {
 	if(use_gradiant === false && single_color === false) {
 		draw_context.fillStyle = "green";
 		
-		console.log("both unchecked");
-		
 		for(var i = 0; i < data_size;i++) {
 			var data_height = (data[i] / data_size) * canvas.height;
 			draw_context.fillRect(i, canvas.height - data_height, data_size / canvas.width, data_height);
@@ -329,8 +327,6 @@ function renderData() {
 	}
 	else {
 		if(use_gradiant === true) {
-			console.log("gradient");
-			
 			var fcolor1 = [Number("0x" + color_1.charAt(1) +  color_1.charAt(2)), Number("0x" + color_1.charAt(3) +  color_1.charAt(4)), Number("0x" + color_1.charAt(5) +  color_1.charAt(6))];
 			var fcolor2 = [Number("0x" + color_2.charAt(1) +  color_2.charAt(2)), Number("0x" + color_2.charAt(3) +  color_2.charAt(4)), Number("0x" + color_2.charAt(5) +  color_2.charAt(6))];
 			
@@ -360,8 +356,6 @@ function renderData() {
 			}
 		}
 		else {
-			console.log("single color");
-			
 			// single_color === true
 			draw_context.fillStyle = color_1;
 			
