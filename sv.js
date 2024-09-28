@@ -28,7 +28,7 @@ var color_1 = "#000000";
 var color_2 = "#000000";
 
 var use_gradiant = false;
-var single_color = false;
+var single_color = true;
 
 initalize();
 

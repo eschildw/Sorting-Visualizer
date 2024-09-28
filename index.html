@@ -83,10 +83,10 @@
                 <button id="stepbutton">Step</button>
 		        <button id="resetbutton">Reset</button>
                 <button id="playbutton">Play</button>
-		        <input id="color1input" type="color" onchange="setColor1()"></input>
+		        <input id="color1input" type="color" onchange="setColor1()" value="#11B8BB"></input>
 		        <input id="color2input" type="color" onchange="setColor2()"></input>
 		        <input id="gradientbutton" type="radio" onclick="toggleGradientColor();">Use Gradient</button>
-		        <input id="singlecolorbutton" type="radio" onclick="toggleSingleColor();">Use Single Color</button>
+		        <input id="singlecolorbutton" type="radio" onclick="toggleSingleColor();" checked>Use Single Color</button>
 		        <canvas id="screen" width="1080" height="720" style="border:1px solid #000000"></canvas>
 		        <script src="sv.js"></script>
             </div>
@@ -174,7 +174,6 @@
         <section id="works" class="s-about">
             <p class="text-subtitle">Put something here?</p>
             <span><img src="favicon.ico" width="25%" height="auto"></span>
-            <span><img src="guard_log.jpg" width="25%" height="auto"></span>
 
         </section> <!-- end section works -->
 
