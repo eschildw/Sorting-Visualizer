@@ -436,7 +436,6 @@ function step() {
 		}
 	}
 	renderData();
-	console.log(isSorted());
 }
 function fullSpeedSort() {
 	steps = 1;
@@ -448,6 +447,8 @@ function fullSpeedSort() {
 function toggleSingleColor() {
 	single_color = !single_color;
 	
+	document.getElementById("singlecolorbutton").checked = single_color;
+	
 	if(use_gradiant === true) {
 		document.getElementById("gradientbutton").checked = false;
 		use_gradiant = false;
@@ -458,6 +459,8 @@ function toggleSingleColor() {
 function toggleGradientColor() {
 	use_gradiant = !use_gradiant;
 	
+	document.getElementById("gradientbutton").checked = use_gradiant;
+	
 	if(single_color === true) {
 		document.getElementById("singlecolorbutton").checked = false;
 		single_color = false;
@@ -467,9 +470,11 @@ function toggleGradientColor() {
 }
 function setColor1() {
 	color_1 = document.getElementById("color1input").value;
+	renderData();
 }
 function setColor2() {
 	color_2 = document.getElementById("color2input").value;
+	renderData();
 }
 // value must be between 0 and 1
 function clamp(min, max, value) {
