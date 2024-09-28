@@ -1,15 +1,16 @@
 // Data array
 var data = [];
+var data_size = 0;
 // Swap array
 var randomizer_array = [];
 // How many iterations we should run in each call
-var steps;
+var steps = 1;
 // How many iterations have been completed in total
-var steps_completed;
+var steps_completed = 0;
 
 var is_sorted = false;
 // Current sorting algorithm
-var current_sorting_function;
+var current_sorting_function = "selectionSort";
 
 // Screen Variables
 var backaround_color = "white";
@@ -17,9 +18,24 @@ var backaround_color = "white";
 
 initalize();
 
+var temp1 = document.getElementById('samplebutton');
+
+temp1.addEventListener('click', function() {
+	console.log("click");
+    step();
+}, false);
+
 // Initalizes all data
 function initalize() {
+	var canvas = document.getElementById("screen");
+	canvas.style.background = backaround_color;
+	var draw_context = canvas.getContext("2d");
 	
+	data_size = canvas.width;
+	
+	for(var i = 0; i < data_size;i++) {
+		data.push(data_size - i + 1);
+	}
 	
 	
 	renderData();
@@ -40,8 +56,47 @@ function changeSort(algorithm) {
 	dataReset();
 }
 /* Sorting Algorithms */
-function insertionSort() {
-	
+function selectionSort() {
+	var counter = 0;
+	if(steps_completed === 0) {
+		for(var i = 0; i < data_size - 1;i++) {
+			counter = counter + 1;
+			var min = i;
+			for(var j = i + 1; j < data_size;j++) {
+				if(data[j] < data[min]) {
+					min = j;
+				}
+			}	
+			if(min != i) {
+				var temp = data[i];
+				data[i] = data[min];
+				data[min] = temp;
+			}
+			if(counter === steps) {
+				break;
+			}
+		}
+	}
+	else {
+		for(var i = steps_completed - 1; i < data_size - 1;i++) {
+			counter = counter + 1;
+			var min = i;
+			for(var j = i + 1; j < data_size;j++) {
+				if(data[j] < data[min]) {
+					min = j;
+				}
+			}	
+			if(min != i) {
+				var temp = data[i];
+				data[i] = data[min];
+				data[min] = temp;
+			}
+			if(counter === steps) {
+				break;
+			}
+		}
+	}
+	steps_completed = steps_completed + steps;
 }
 // Clears the sorting screen
 function clearScreen() {
@@ -63,13 +118,16 @@ function renderData() {
 	
 	draw_context.fillStyle = "green";
 	
-	draw_context.fillRect(0, 0, canvas.width, canvas.height);
+	for(var i = 0; i < data_size;i++) {
+		var data_height = (data[i] / data_size) * canvas.height;
+		draw_context.fillRect(i, canvas.height - data_height, data_size / canvas.width, data_height);
+	}
 }
 
 function step() {
 	switch(current_sorting_function) {
-		case "insertion_sort": {
-			Insertion_Sort();
+		case "selectionSort": {
+			selectionSort();
 			break;
 		}
 		default: {
