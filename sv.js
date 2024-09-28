@@ -27,8 +27,14 @@ var backaround_color = "white";
 var color_1 = "#000000";
 var color_2 = "#000000";
 
+<<<<<<< Updated upstream
 var use_gradiant = false;
 var single_color = true;
+=======
+var use_non_linear_gradiant = false;
+var use_linear_gradiant = false;
+var single_color = false;
+>>>>>>> Stashed changes
 
 initalize();
 
@@ -360,7 +366,7 @@ function renderData() {
 	canvas.style.background = backaround_color;
 	var draw_context = canvas.getContext("2d");
 	
-	if(use_gradiant === false && single_color === false) {
+	if(use_linear_gradiant === false && single_color === false && use_non_linear_gradiant === false) {
 		draw_context.fillStyle = "green";
 		
 		for(var i = 0; i < data_size;i++) {
@@ -369,7 +375,7 @@ function renderData() {
 		}
 	}
 	else {
-		if(use_gradiant === true) {
+		if(use_linear_gradiant === true) {
 			var fcolor1 = [Number("0x" + color_1.charAt(1) +  color_1.charAt(2)), Number("0x" + color_1.charAt(3) +  color_1.charAt(4)), Number("0x" + color_1.charAt(5) +  color_1.charAt(6))];
 			var fcolor2 = [Number("0x" + color_2.charAt(1) +  color_2.charAt(2)), Number("0x" + color_2.charAt(3) +  color_2.charAt(4)), Number("0x" + color_2.charAt(5) +  color_2.charAt(6))];
 			
@@ -399,12 +405,45 @@ function renderData() {
 			}
 		}
 		else {
-			// single_color === true
-			draw_context.fillStyle = color_1;
-			
-			for(var i = 0; i < data_size;i++) {
-				var data_height = (data[i] / data_size) * canvas.height;
-				draw_context.fillRect(i, canvas.height - data_height, data_size / canvas.width, data_height);
+			if(use_non_linear_gradiant === true) {
+				var fcolor1 = [Number("0x" + color_1.charAt(1) +  color_1.charAt(2)), Number("0x" + color_1.charAt(3) +  color_1.charAt(4)), Number("0x" + color_1.charAt(5) +  color_1.charAt(6))];
+				var fcolor2 = [Number("0x" + color_2.charAt(1) +  color_2.charAt(2)), Number("0x" + color_2.charAt(3) +  color_2.charAt(4)), Number("0x" + color_2.charAt(5) +  color_2.charAt(6))];
+				
+				var diff1 = ((fcolor2[0] - fcolor1[0]) / data_size);
+				var diff2 = ((fcolor2[1] - fcolor1[1]) / data_size);
+				var diff3 = ((fcolor2[2] - fcolor1[2]) / data_size);
+				for(var i = 0; i < data_size;i++) {
+					var progress = i / data_size;
+					progress = nonLinearize(progress);
+					var r = Math.floor((fcolor1[0] + ((diff1 * i) * progress))).toString(16);
+					var g = Math.floor((fcolor1[1] + ((diff2 * i) * progress))).toString(16);
+					var b = Math.floor((fcolor1[2] + ((diff3 * i) * progress))).toString(16);
+					
+					if(r.length === 1) {
+						r = "0" + r;
+					}
+					if(g.length === 1) {
+						g = "0" + g;
+					}
+					if(b.length === 1) {
+						b = "0" + b;
+					}
+					var hex = "#" + r + g + b;
+					
+					draw_context.fillStyle = hex;
+					
+					var data_height = (data[i] / data_size) * canvas.height;
+					draw_context.fillRect(i, canvas.height - data_height, data_size / canvas.width, data_height);
+				}
+			}
+			else {
+				// single_color === true
+				draw_context.fillStyle = color_1;
+				
+				for(var i = 0; i < data_size;i++) {
+					var data_height = (data[i] / data_size) * canvas.height;
+					draw_context.fillRect(i, canvas.height - data_height, data_size / canvas.width, data_height);
+				}
 			}
 		}
 	}	
@@ -449,21 +488,45 @@ function toggleSingleColor() {
 	
 	document.getElementById("singlecolorbutton").checked = single_color;
 	
-	if(use_gradiant === true) {
-		document.getElementById("gradientbutton").checked = false;
-		use_gradiant = false;
+	if(use_linear_gradiant === true) {
+		document.getElementById("gradientlinearbutton").checked = false;
+		use_linear_gradiant = false;
+	}
+	if(use_non_linear_gradiant === true) {
+		document.getElementById("gradientnonlinearbutton").checked = false;
+		use_non_linear_gradiant = false;
 	}
 	
 	renderData();
 }
-function toggleGradientColor() {
-	use_gradiant = !use_gradiant;
+function toggleLinearGradientColor() {
+	use_linear_gradiant = !use_linear_gradiant;
 	
-	document.getElementById("gradientbutton").checked = use_gradiant;
+	document.getElementById("gradientlinearbutton").checked = use_linear_gradiant;
 	
 	if(single_color === true) {
 		document.getElementById("singlecolorbutton").checked = false;
 		single_color = false;
+	}
+	if(use_non_linear_gradiant === true) {
+		document.getElementById("gradientnonlinearbutton").checked = false;
+		use_non_linear_gradiant = false;
+	}
+	
+	renderData();
+}
+function toggleNonLinearGradientColor() {
+	use_non_linear_gradiant = !use_non_linear_gradiant;
+	
+	document.getElementById("gradientnonlinearbutton").checked = use_non_linear_gradiant;
+	
+	if(single_color === true) {
+		document.getElementById("singlecolorbutton").checked = false;
+		single_color = false;
+	}
+	if(use_linear_gradiant === true) {
+		document.getElementById("gradientlinearbutton").checked = false;
+		use_linear_gradiant = false;
 	}
 	
 	renderData();
@@ -485,5 +548,14 @@ function clamp(min, max, value) {
 		value = 0;
 	}
 	return min + ((max - min) * value);
+}
+function nonLinearize(value) {
+	if(value > 1) {
+		value = 1;
+	}
+	if(value < 0) {
+		value = 0;
+	}
+	return Math.pow(Math.sin(Math.PI * value * 0.5), 6);
 }
 
