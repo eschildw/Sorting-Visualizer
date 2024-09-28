@@ -75,6 +75,49 @@ function initalize() {
 	renderData();
 }
 
+function checkPairs(pow2) {
+	if(data_size % pow2 === 0) {
+		var temp1 = 2;
+		var temp2 = 1;
+		while(temp1 < pow2) {
+			if(data[(temp2 * data_size) / temp1] < data[((temp2 * data_size) / temp1) - 1]) {
+				return false;
+			}
+			for(var i = 0; i < (temp1 / 2) - 1;i++) {
+				temp2 = temp2 + 2;
+				if(data[(temp2 * data_size) / temp1] < data[((temp2 * data_size) / temp1) - 1]) {
+					return false;
+				}
+			}
+			temp1 = temp1 * 2;
+		}
+		return true;
+	}
+	return true;
+}
+
+function isSorted() {
+	if(checkPairs(2) === false) {
+		return false;
+	}
+	if(checkPairs(4) === false) {
+		return false;
+	}
+	if(checkPairs(8) === false) {
+		return false;
+	}
+	if(checkPairs(16) === false) {
+		return false;
+	}
+	
+	for(var i = 1; i < data_size;i++) {
+		if(data[i - 1] > data[i]) {
+			return false;
+		}
+	}
+	return true;
+}
+
 // Creates the randomizer array
 function createRandomizer() {
 	var canvas = document.getElementById("screen");
@@ -393,6 +436,7 @@ function step() {
 		}
 	}
 	renderData();
+	console.log(isSorted());
 }
 function fullSpeedSort() {
 	steps = 1;
