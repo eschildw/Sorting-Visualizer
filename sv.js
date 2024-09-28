@@ -27,14 +27,9 @@ var backaround_color = "white";
 var color_1 = "#000000";
 var color_2 = "#000000";
 
-<<<<<<< Updated upstream
-var use_gradiant = false;
-var single_color = true;
-=======
 var use_non_linear_gradiant = false;
 var use_linear_gradiant = false;
-var single_color = false;
->>>>>>> Stashed changes
+var single_color = true;
 
 initalize();
 
@@ -484,7 +479,9 @@ function fullSpeedSort() {
 	renderData();
 }
 function toggleSingleColor() {
-	single_color = !single_color;
+	if(use_linear_gradiant === true || use_non_linear_gradiant === true) {
+		single_color = true;
+	}
 	
 	document.getElementById("singlecolorbutton").checked = single_color;
 	
@@ -508,6 +505,10 @@ function toggleLinearGradientColor() {
 		document.getElementById("singlecolorbutton").checked = false;
 		single_color = false;
 	}
+	if(use_linear_gradiant === false) {
+		document.getElementById("singlecolorbutton").checked = true;
+		single_color = true;
+	}
 	if(use_non_linear_gradiant === true) {
 		document.getElementById("gradientnonlinearbutton").checked = false;
 		use_non_linear_gradiant = false;
@@ -523,6 +524,10 @@ function toggleNonLinearGradientColor() {
 	if(single_color === true) {
 		document.getElementById("singlecolorbutton").checked = false;
 		single_color = false;
+	}
+	if(use_non_linear_gradiant === false) {
+		document.getElementById("singlecolorbutton").checked = true;
+		single_color = true;
 	}
 	if(use_linear_gradiant === true) {
 		document.getElementById("gradientlinearbutton").checked = false;
