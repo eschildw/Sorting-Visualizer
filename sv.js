@@ -168,7 +168,6 @@ function dataReset() {
 	//Will trigger quicksort reset
 	size = -1;
 	renderData();
-	
 	clearInterval(step_interval)
 
 	mergeSort_isInitiated = shellSort_isInitialized = false;
