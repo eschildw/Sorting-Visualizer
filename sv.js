@@ -18,7 +18,7 @@ var steps_completed = 0;
 
 var is_sorted = false;
 // Current sorting algorithm
-var current_sorting_function = "selectionSort";
+var current_sorting_function = "mergeSort";
 
 
 // Screen Variables
@@ -167,6 +167,8 @@ function dataReset() {
 	size = -1;
 	renderData();
 	clearInterval(step_interval)
+
+	mergeSort_isInitiated = shellSort_isInitialized = false;
 }
 // Changes sorting algorithm
 function changeSort(algorithm) {
@@ -251,6 +253,51 @@ function shellSort() {
         }
     }
 	steps_completed += swapsMade;
+}
+
+// Temporary array for merge sort
+let mergeSortTempData;
+let mergeRanges;
+let mergeSort_isInitiated = false;
+function merge(data, start, mid, end) {
+	let left = start;
+	let right = mid;
+	let tmpIdx = start;
+	while (left < mid && right < end) {
+		mergeSortTempData[tmpIdx++] = data[data[left] <= data[right]? left++: right++];
+	}
+	while (left < mid) {
+		mergeSortTempData[tmpIdx++] = data[left++];
+	}
+	while (right < end) {
+		mergeSortTempData[tmpIdx++] = data[right++];
+	}
+	for (let i = start; i < end; i++) {
+		data[i] = mergeSortTempData[i];
+	}
+}
+function mergeSort() {
+	if (!mergeSort_isInitiated) {
+		mergeSortTempData = new Array(data_size);
+		mergeRanges = [];
+		for (let size = 1; size < data_size; size *= 2) {
+			for (let start = 0; start < data_size; start += 2 * size) {
+				const mid = Math.min(start + size, data.length);
+				const end = Math.min(start + 2 * size, data.length);
+				if (mid < end) {
+					mergeRanges.push({ start, mid, end });
+				}
+			}
+		}
+		mergeSort_isInitiated = true;
+	}
+	let mergesMade = 0;
+	while (mergeRanges.length > 0 && mergesMade < steps) {
+		const { start, mid, end } = mergeRanges.shift();
+		merge(data, start, mid, end);
+		mergesMade++;
+	}
+	console.log("Just ran mergeSort()!");
 }
 
 //Quicksort based on this link: //https://stackoverflow.com/questions/68524038/is-there-a-python-implementation-of-quicksort-without-recursion
@@ -460,6 +507,10 @@ function step() {
 			shellSort();
 			break;
         }
+		case "mergeSort": {
+			mergeSort();
+			break;
+		}
 		case "quickSort": {
 		    quickSort();
 		    break;
