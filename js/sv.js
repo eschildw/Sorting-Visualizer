@@ -387,8 +387,6 @@ function createRandomizer() {
 	var num1 = 0;
 	var num2 = 0;
 	
-	while(counter < canvas.width) {
-		var number = Math.floor(Math.random() * canvas.width);
 	while(counter < data_size) {
 		var number = Math.floor(Math.random() * data_size);
 		
@@ -723,7 +721,6 @@ function renderData() {
 		
 		for(var i = 0; i < data_size;i++) {
 			var data_height = (data[i] / data_size) * canvas.height;
-			draw_context.fillRect(i, canvas.height - data_height, data_size / canvas.width, data_height);
 			draw_context.fillRect(i * (canvas.width / data_size), canvas.height - data_height, canvas.width / data_size, data_height);
 		}
 	}
@@ -754,7 +751,6 @@ function renderData() {
 				draw_context.fillStyle = hex;
 				
 				var data_height = (data[i] / data_size) * canvas.height;
-				draw_context.fillRect(i, canvas.height - data_height, data_size / canvas.width, data_height);
 				draw_context.fillRect(i * (canvas.width / data_size), canvas.height - data_height, canvas.width / data_size, data_height);
 			}
 		}
@@ -798,7 +794,6 @@ function renderData() {
 					draw_context.fillStyle = hex;
 					
 					var data_height = (data[i] / data_size) * canvas.height;
-					draw_context.fillRect(i, canvas.height - data_height, data_size / canvas.width, data_height);
 					draw_context.fillRect(i * (canvas.width / data_size), canvas.height - data_height, canvas.width / data_size, data_height);
 				}
 			}
@@ -808,7 +803,6 @@ function renderData() {
 				
 				for(var i = 0; i < data_size;i++) {
 					var data_height = (data[i] / data_size) * canvas.height;
-					draw_context.fillRect(i, canvas.height - data_height, data_size / canvas.width, data_height);
 					draw_context.fillRect(i * (canvas.width / data_size), canvas.height - data_height, canvas.width / data_size, data_height);
 				}
 			}
