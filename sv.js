@@ -37,6 +37,8 @@ initalize();
 
 // Initalizes all data
 function initalize() {
+	document.getElementById("currentAlgo").textContent = "Merge Sort";
+	
 	var canvas = document.getElementById("screen");
 	canvas.style.background = backaround_color;
 	var draw_context = canvas.getContext("2d");
@@ -178,6 +180,7 @@ function dataReset() {
 // Changes sorting algorithm
 function changeSort(algorithm) {
 	current_sorting_function = algorithm.name;
+	document.getElementById("currentAlgo").textContent = sortName(current_sorting_function);
 	dataReset();
 }
 /* Sorting Algorithms */
@@ -525,6 +528,34 @@ function step() {
 		}
 	}
 	renderData();
+}
+function sortName() {
+	switch(current_sorting_function) {
+		case "selectionSort": {
+			return "Selection Sort";
+			break;
+		}
+		case "insertionSort": {
+		    return "Insertion Sort";
+		    break;
+		}
+		case "shellSort": {
+			return "Shell Sort";
+			break;
+        }
+		case "mergeSort": {
+			return "Merge Sort";
+			break;
+		}
+		case "quickSort": {
+		    return "Quick Sort";
+		    break;
+
+		}
+		default: {
+			break;
+		}
+	}
 }
 function fullSpeedSort() {
 	steps = 1;
