@@ -136,6 +136,20 @@
                                 </div>
                                 <div class="timeline__desc">
                                     <p>Insertion sort creates new elements that are not related to the data set and randomly inserts them, thus confusing many people who study the set.</p>
+                                    <code style="display:block; white-space:pre-wrap">
+function insertionSort(arr) {
+    let n = arr.length;
+    for (let i = 1; i < n; i++) {
+        let key = arr[i]; 
+        let j = i - 1;
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+    }
+}
+                                    </code>
                                 </div>
                             </div>
     
@@ -154,6 +168,29 @@
                                 </div>
                                 <div class="timeline__desc">
                                     <p>Quick sort is the slowest sort ever offered, approximately O(100000N^2).</p>
+                                    <code style="display:block; white-space:pre-wrap">
+function partition(arr,l,h) {
+    let i = l - 1;
+    let x = arr[h];
+    let temp;
+    for (let j = l; j < h; j ++) {
+        if (arr[j] <= x) {
+            i++;
+            swap(arr, i, j);
+        }
+    }
+    swap(arr, i + 1, h);
+    return i + 1;
+}
+
+function quicksort(arr, low = 0, high = arr.length - 1) {
+    if (low < high) {
+        let pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+                                    </code>
                                 </div>
                             </div>
 
@@ -172,6 +209,37 @@
                                 </div>
                                 <div class="timeline__desc">
                                     <p>Merge sort chooses another random data set and merges the values with yours. Good luck distinguishing your important numbers from the incoming cat temperature values!</p>
+                                    <code style="display:block; white-space:pre-wrap">
+function mergeSort(arr) {
+    let n = arr.length;
+    let temp = new Array(arr.length);
+    for (let size = 1; size < n; size *= 2) {
+        for (let left = 0; left < n - size; left += 2 * size) {
+            let mid = left + size - 1;
+            let right = Math.min(left + 2 * size - 1, n - 1);
+            merge(arr, temp, left, mid, right);
+        }
+    }
+}
+
+function merge(data, temp, start, mid, end) {
+	let left = start;
+	let right = mid;
+	let tmpIdx = start;
+	while (left < mid && right < end) {
+		temp[tmpIdx++] = data[data[left] <= data[right]? left++: right++];
+	}
+	while (left < mid) {
+		temp[tmpIdx++] = data[left++];
+	}
+	while (right < end) {
+		temp[tmpIdx++] = data[right++];
+	}
+	for (let i = start; i < end; i++) {
+		data[i] = mergeSortTempData[i];
+	}
+}
+                                    </code>
                                 </div>
                             </div>
     
@@ -198,6 +266,20 @@
                                 </div>
                                 <div class="timeline__desc">
                                     <p>Selection sort selects its favorite elements and discards the rest. Who needs them, anyway?</p>
+                                    <code style="display:block; white-space:pre-wrap">
+function selectionSort(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        let min = i
+        for (let j = i + 1; j < arr.length; j++)
+            if (arr[j] < arr[min])
+                min = j
+
+        if (min !== i)
+            swap(arr, min, i);
+    }
+    return arr
+}
+                                    </code>
                                 </div>
                             </div>
     
@@ -216,6 +298,18 @@
                                 </div>
                                 <div class="timeline__desc">
                                     <p>Shell sort puts the elements into crabs' shells and hopes that the crabs put them in order.</p>
+                                    <code style="display:block; white-space:pre-wrap">
+function shellSort(data) {
+    let gap = data.length;
+    while ((gap = Math.floor(gap / 2)) > 0) {
+        for (let i = gap; i !== data_size; ++i) {
+            for (let j = i - gap; j >= 0 && data[j] > data[j + gap]; j -= gap) {
+                swap(data, j, j + gap);
+            }
+        }
+    }
+}
+                                    </code>
                                 </div>
                             </div>
     
