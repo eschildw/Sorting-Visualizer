@@ -52,10 +52,6 @@ var step_interval4;
 var step_interval5;
 var step_sorted = true;
 var manual_press = false;
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 
 initalize();
 
@@ -71,11 +67,7 @@ function initalize() {
 	var temp1 = document.getElementById('stepbutton');
 
 	temp1.addEventListener('click', function() {
-<<<<<<< Updated upstream
-		manual_press = true;
-=======
 	    manual_press = true;
->>>>>>> Stashed changes
 		step();
 		manual_press=false;
 	}, false);
@@ -817,13 +809,8 @@ function step() {
 			break;
 		}
 	}
-<<<<<<< Updated upstream
-	if (manual_press!=true) {
-	    step_sorted = isSorted()
-=======
 	if (!manual_press) {
 	    step_sorted = isSorted();
->>>>>>> Stashed changes
 	}
 	if (step_sorted) {
 		if(aesthetic_on === true) {
