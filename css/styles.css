@@ -2097,7 +2097,7 @@ select:-webkit-autofill:focus {
  .side-bar-top {
     position:absolute;
     margin-top:10px;
-    margin-left: 75%;
+    margin-left: 70%;
     text-align:center;
     max-width:300px;
     max-height:460px; 
