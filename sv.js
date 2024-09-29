@@ -657,13 +657,9 @@ function step() {
 			break;
 		}
 	}
-<<<<<<< Updated upstream
 	if (!manual_press) {
 	    step_sorted = isSorted();
 	}
-=======
-	step_sorted = isSorted();
->>>>>>> Stashed changes
 	if (step_sorted) {
 		if(aesthetic_on === true) {
 			aestheticDone = true;
