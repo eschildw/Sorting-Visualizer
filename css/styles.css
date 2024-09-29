@@ -2116,6 +2116,8 @@ select:-webkit-autofill:focus {
 
 .slidecontainer {
     width: 70%; /* Width of the outside container */
+	float: right;
+	margin-top:4%;
 }
 
 .slider {
