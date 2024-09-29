@@ -31,6 +31,17 @@ var use_non_linear_gradiant = false;
 var use_linear_gradiant = false;
 var single_color = true;
 
+var copy_current_sorting_function = "";
+var copy_use_non_linear_gradiant = false;
+var copy_use_linear_gradiant = false;
+var copy_single_color = false;
+var copy_color_1 = "";
+var copy_color_2 = "";
+
+var aesthetic_on = false;
+var aesthetic_mode_interval;
+var aestheticDone = true;
+
 var step_interval;
 var step_interval2;
 var step_interval3;
@@ -107,6 +118,63 @@ function initalize() {
 	renderData();
 }
 
+
+function aestheticMode() {
+	if(aesthetic_on === true) {
+		aesthetic_on = false;
+		if(aesthetic_mode_interval !== null) {
+			clearInterval(aesthetic_mode_interval);
+		}
+		current_sorting_function = copy_current_sorting_function;
+		use_non_linear_gradiant = copy_use_non_linear_gradiant;
+		use_linear_gradiant = copy_use_linear_gradiant;
+		single_color = copy_single_color;
+		color_1 = copy_color_1;
+		color_2 = copy_color_2;
+		
+		if(single_color === true) {
+			document.getElementById("gradientnonlinearbutton").checked = false;
+			use_non_linear_gradiant = false;
+			document.getElementById("gradientlinearbutton").checked = false;
+			use_linear_gradiant = false;
+		}
+		if(use_linear_gradiant === true) {
+			document.getElementById("gradientnonlinearbutton").checked = false;
+			use_non_linear_gradiant = false;
+			document.getElementById("singlecolorbutton").checked = false;
+			single_color = false;
+		}
+		if(use_non_linear_gradiant === true) {
+			document.getElementById("gradientlinearbutton").checked = false;
+			use_linear_gradiant = false;
+			document.getElementById("singlecolorbutton").checked = false;
+			single_color = false;
+		}
+		
+		document.getElementById("color1input").value = color_1;
+		document.getElementById("color2input").value = color_2;
+	}
+	else {
+		copy_current_sorting_function = current_sorting_function;
+		copy_use_non_linear_gradiant = use_non_linear_gradiant;
+		copy_use_linear_gradiant = copy_use_linear_gradiant;
+		copy_single_color = single_color;
+		copy_color_1 = color_1;
+		copy_color_2 = color_2;
+		
+		document.getElementById("color1input").value = copy_color_1;
+		document.getElementById("color2input").value = copy_color_2;
+		
+		aesthetic_on = true;
+	}
+	aesthetic_mode_interval = setInterval(runAesthetic, 7);
+	//chooseSortFromID
+}
+function runAesthetic() {
+	if(aestheticDone === true) {
+		dataReset();
+	}
+}
 function checkPairs(pow2) {
 	if(data_size % pow2 === 0) {
 		var temp1 = 2;
@@ -589,10 +657,17 @@ function step() {
 			break;
 		}
 	}
+<<<<<<< Updated upstream
 	if (!manual_press) {
 	    step_sorted = isSorted();
 	}
+=======
+	step_sorted = isSorted();
+>>>>>>> Stashed changes
 	if (step_sorted) {
+		if(aesthetic_on === true) {
+			aestheticDone = true;
+		}
 	    clearInterval(step_interval)
 	    clearInterval(step_interval2)
 	    clearInterval(step_interval3)
@@ -622,6 +697,34 @@ function sortName() {
 		}
 		case "quickSort": {
 		    return "Quick Sort";
+		    break;
+
+		}
+		default: {
+			break;
+		}
+	}
+}
+function chooseSortFromID(sort) {
+	switch(sort) {
+		case 0: {
+			return "selectionSort";
+			break;
+		}
+		case 1: {
+		    return "insertionSort";
+		    break;
+		}
+		case 2: {
+			return "shellSort";
+			break;
+        }
+		case 3: {
+			return "mergeSort";
+			break;
+		}
+		case 4: {
+		    return "quickSort";
 		    break;
 
 		}
