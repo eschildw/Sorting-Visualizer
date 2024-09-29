@@ -32,6 +32,12 @@ var use_linear_gradiant = false;
 var single_color = true;
 
 var step_interval;
+var step_interval2;
+var step_interval3;
+var step_interval4;
+var step_interval5;
+var step_sorted = true;
+
 
 initalize();
 
@@ -59,7 +65,28 @@ function initalize() {
 
 	temp1 = document.getElementById('playbutton');
 	temp1.addEventListener('click', function() {
-		step_interval = setInterval(step,7)
+	    if (step_sorted) {
+	        speed = 10-document.getElementById('speedSlider').value
+	        if (speed==9) {
+	            speed = speed*5
+	        }
+	        if (speed==8) {
+	            speed = speed*3
+	        }
+		    step_interval = setInterval(step,(speed-4)*speed);
+		    if (speed<=3) {
+		        step_interval2 = setInterval(step,speed)
+		    }
+		    if (speed<=2) {
+		        step_interval3 = setInterval(step,speed)
+		    }
+		    if (speed<=1) {
+		        step_interval4 = setInterval(step,speed)
+		    }
+		    if (speed<=0) {
+		        step_interval5 = setInterval(step,speed)
+		    }
+		}
 	}, false);
 
 	createRandomizer();
@@ -170,12 +197,18 @@ function dataReset() {
 	//Will trigger quicksort reset
 	size = -1;
 	renderData();
+	//Resets speed and sort lock
 	clearInterval(step_interval)
+	clearInterval(step_interval2)
+	clearInterval(step_interval3)
+	clearInterval(step_interval4)
+	clearInterval(step_interval5)
+	step_sorted = true
 
 	mergeSort_isInitiated = shellSort_isInitialized = false;
-	if(step_interval) {
-		clearInterval(step_interval)
-	}
+	//if(step_interval) {
+	//	clearInterval(step_interval)
+	//}
 }
 // Changes sorting algorithm
 function changeSort(algorithm) {
@@ -526,6 +559,14 @@ function step() {
 		default: {
 			break;
 		}
+	}
+	step_sorted = isSorted()
+	if (step_sorted) {
+	    clearInterval(step_interval)
+	    clearInterval(step_interval2)
+	    clearInterval(step_interval3)
+	    clearInterval(step_interval4)
+	    clearInterval(step_interval5)
 	}
 	renderData();
 }
