@@ -66,6 +66,7 @@ function initalize() {
 	temp1.addEventListener('click', function() {
 	    manual_press = true;
 		step();
+		step_sorted=true
 	}, false);
 
 	temp1 = document.getElementById('resetbutton');
@@ -657,6 +658,7 @@ function step() {
 			break;
 		}
 	}
+<<<<<<< Updated upstream
 	if (!manual_press) {
 	    step_sorted = isSorted();
 	}
@@ -664,13 +666,17 @@ function step() {
 		if(aesthetic_on === true) {
 			aestheticDone = true;
 		}
+    step_sorted = isSorted();
+	if (step_sorted && manual_press==false) {
 	    clearInterval(step_interval)
 	    clearInterval(step_interval2)
 	    clearInterval(step_interval3)
 	    clearInterval(step_interval4)
 	    clearInterval(step_interval5)
 	}
-	manual_press = false
+	if (manual_press) {
+	    manual_press = false;
+	}
 	renderData();
 }
 function sortName() {
@@ -680,7 +686,7 @@ function sortName() {
 			break;
 		}
 		case "insertionSort": {
-		    return "Insertion Sort";
+		    return "Insertion Sort";Fs
 		    break;
 		}
 		case "shellSort": {
