@@ -688,11 +688,11 @@ var quick_top;
 function quickSort() {
     var canvas = document.getElementById("screen");
     if (size == -1) {
-        initializeQuickSort(0,canvas.width)
+        initializeQuickSort(0, data_size)
     }
     let i = 0;
     while (i<=steps) {
-        quickSortIterative(data,0,canvas.width)
+        quickSortIterative(data, 0, data_size)
         i++;
     }
     steps_completed = steps_completed + steps
