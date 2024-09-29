@@ -78,15 +78,31 @@
         <!-- intro
         ================================================== -->
         <section id="intro" class="s-intro">
-
-            <div class="row">
-                <button id="stepbutton">Step</button>
-		        <button id="resetbutton">Reset</button>
-                <button id="playbutton">Play</button>
-		        <input id="color1input" type="color" onchange="setColor1()" value="#11B8BB"></input>
-		        <input id="color2input" type="color" onchange="setColor2()"></input>
-		        <input id="gradientlinearbutton" type="radio" onclick="toggleLinearGradientColor();">Use Linear Gradient</button>
+			<canvas id="screen" width="854" height="480" style="margin-left: 10%;border:1px solid #000000;float:left;"></canvas>
+			<div class="side-bar-top">
+				<style>
+					.side-bar-top {
+						position:absolute;
+						margin-top:20px;
+						margin-left: 75%;
+						text-align:center;
+						max-width:260px;
+						max-height:440px;
+						background:rgba(0, 0, 0, 0.75);
+						padding:10px 0px 20px 0px;
+						border:1px solid #111;
+						border-radius:4px;
+						float:right;
+					}
+				</style>
+				<button id="stepbutton">Step</button>
+				<button id="resetbutton">Reset</button>
+				<button id="playbutton">Play</button>
+				<input id="color1input" type="color" onchange="setColor1()" value="#11B8BB"></input>
+				<input id="color2input" type="color" onchange="setColor2()"></input>
+				<input id="gradientlinearbutton" type="radio" onclick="toggleLinearGradientColor();">Use Linear Gradient</button>
 				<input id="gradientnonlinearbutton" type="radio" onclick="toggleNonLinearGradientColor();">Use Non-Linear Gradient</button>
+<<<<<<< Updated upstream
 		        <input id="singlecolorbutton" type="radio" onclick="toggleSingleColor();" checked>Use Single Color</button>
 		        <canvas id="screen" width="1080" height="720" style="border:1px solid #000000"></canvas>
 		        <script src="sv.js"></script>
@@ -94,6 +110,13 @@
                     <input type="range" min="1" max="100" value="50" class="slider" id="speedSlider">Speed</input>
                 </div>
             </div>
+=======
+				<input id="singlecolorbutton" type="radio" onclick="toggleSingleColor();" checked>Use Single Color</button>
+				
+				<script src="sv.js"></script>
+			</div>
+           
+>>>>>>> Stashed changes
 
         </section> <!-- end s-intro -->
 
