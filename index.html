@@ -183,57 +183,12 @@ function partition(arr,l,h) {
     return i + 1;
 }
 
-function quicksort(arr, low = 0, high = arr.length - 1) {
+function quickSort(arr, low = 0, high = arr.length - 1) {
     if (low < high) {
         let pi = partition(arr, low, high);
         quickSort(arr, low, pi - 1);
         quickSort(arr, pi + 1, high);
     }
-}
-                                    </code>
-                                </div>
-                            </div>
-
-                            <div class="timeline__block">
-                                <div class="timeline__bullet"></div>
-                                <div class="timeline__header">
-                                    <h4 class="timeline__title">
-										<a href="#intro" class="smoothscroll" onclick="changeSort(mergeSort);">Merge Sort
-											<style>
-												a:link, a:visited {
-												  color: black;
-												}
-											</style>
-										</a>
-									</h4>
-                                </div>
-                                <div class="timeline__desc">
-                                    <p>An array of length 1 is sorted by definition. Merge sort merges these into one array of length 2; then, it merges 2 arrays of length 2 into one array of length 4; and so on.</p>
-                                    <code style="display:block; white-space:pre-wrap">
-function mergeSort(arr) {
-    let n = arr.length;
-    let temp = new Array(arr.length);
-    for (let size = 1; size < n; size *= 2) {
-        for (let left = 0; left < n - size; left += 2 * size) {
-            let mid = left + size - 1;
-            let right = Math.min(left + 2 * size - 1, n - 1);
-            merge(arr, temp, left, mid, right);
-        }
-    }
-}
-
-function merge(data, temp, start, mid, end) {
-    let left = start;
-    let right = mid;
-    let tmpIdx = start;
-    while (left < mid && right < end) 
-        temp[tmpIdx++] = data[data[left] <= data[right]? left++: right++];
-    while (left < mid)
-        temp[tmpIdx++] = data[left++];
-    while (right < end)
-        temp[tmpIdx++] = data[right++];
-    for (let i = start; i < end; i++)
-        data[i] = temp[i];
 }
                                     </code>
                                 </div>
@@ -304,6 +259,50 @@ function shellSort(data) {
             }
         }
     }
+}
+                                    </code>
+                                </div>
+                            </div>
+                            <div class="timeline__block">
+                                <div class="timeline__bullet"></div>
+                                <div class="timeline__header">
+                                    <h4 class="timeline__title">
+										<a href="#intro" class="smoothscroll" onclick="changeSort(mergeSort);">Merge Sort
+											<style>
+												a:link, a:visited {
+												  color: black;
+												}
+											</style>
+										</a>
+									</h4>
+                                </div>
+                                <div class="timeline__desc">
+                                    <p>An array of length 1 is sorted by definition. Merge sort merges these into one array of length 2; then, it merges 2 arrays of length 2 into one array of length 4; and so on.</p>
+                                    <code style="display:block; white-space:pre-wrap">
+function mergeSort(arr) {
+    let n = arr.length;
+    let temp = new Array(arr.length);
+    for (let size = 1; size < n; size *= 2) {
+        for (let left = 0; left < n - size; left += 2 * size) {
+            let mid = left + size - 1;
+            let right = Math.min(left + 2 * size - 1, n - 1);
+            merge(arr, temp, left, mid, right);
+        }
+    }
+}
+
+function merge(data, temp, start, mid, end) {
+    let left = start;
+    let right = mid;
+    let tmpIdx = start;
+    while (left < mid && right < end) 
+        temp[tmpIdx++] = data[data[left] <= data[right]? left++: right++];
+    while (left < mid)
+        temp[tmpIdx++] = data[left++];
+    while (right < end)
+        temp[tmpIdx++] = data[right++];
+    for (let i = start; i < end; i++)
+        data[i] = temp[i];
 }
                                     </code>
                                 </div>
