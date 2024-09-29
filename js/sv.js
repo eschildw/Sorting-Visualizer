@@ -256,8 +256,8 @@ function aestheticMode() {
 			
 			var canvas = document.getElementById("screen");
 			
-			canvas.width = 1280;
-			canvas.height = 720;
+			canvas.width = 1024;
+			canvas.height = 576;
 			
 			initalize(canvas.width);
 			
