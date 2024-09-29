@@ -66,7 +66,7 @@
                     <ul>
                         <li class="current"><a href="#intro" class="smoothscroll">Display</a></li>
                         <li><a href="#about" class="smoothscroll">Algorithms</a></li>
-                        <li><a href="#intro" onclick="">Aesthetic Mode</a></li>
+                        <li><a href="#intro" onclick="aestheticMode()">Aesthetic Mode</a></li>
                     </ul>
                 </nav> <!-- end s-header__nav -->
 
@@ -91,6 +91,7 @@
 				<input id="color1input" type="color" onchange="setColor1()" value="#11B8BB"></input>
 				<input id="color2input" type="color" onchange="setColor2()"></input>
                 <br>
+<<<<<<< Updated upstream
                 <div class="radiogroup">
   <div class="wrapper">
     <input class="state" id="gradientlinearbutton" type="radio" value="a" onclick="toggleLinearGradientColor();" checked></button>
@@ -115,6 +116,10 @@
   </div>
 </div>
                 <div class="radio-buttons">
+=======
+                <div id="radiobuttons" class="radio-buttons">
+                    <input id="gradientlinearbutton" type="radio" onclick="toggleLinearGradientColor();"> Use Linear Gradient</button>
+>>>>>>> Stashed changes
                     <br>
                     <br>
                     Speed:

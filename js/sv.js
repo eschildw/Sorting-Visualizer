@@ -31,6 +31,20 @@ var use_non_linear_gradiant = false;
 var use_linear_gradiant = false;
 var single_color = true;
 
+var copy_current_sorting_function = "";
+var copy_use_non_linear_gradiant = false;
+var copy_use_linear_gradiant = false;
+var copy_single_color = false;
+var copy_color_1 = "";
+var copy_color_2 = "";
+
+var aesthetic_on = false;
+var aesthetic_mode_interval;
+var aestheticDone = true;
+var aesthetic_reset_interval;
+var aesthetic_reset_is_done = false;
+var aesthetic_completed_steps = 0;
+
 var step_interval;
 var step_interval2;
 var step_interval3;
@@ -38,13 +52,16 @@ var step_interval4;
 var step_interval5;
 var step_sorted = true;
 var manual_press = false;
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 
 initalize();
 
 // Initalizes all data
 function initalize() {
-	document.getElementById("currentAlgo").textContent = "Insertion Sort";
+	document.getElementById("currentAlgo").textContent = sortName(current_sorting_function);
 	
 	var canvas = document.getElementById("screen");
 	canvas.style.background = backaround_color;
@@ -54,7 +71,11 @@ function initalize() {
 	var temp1 = document.getElementById('stepbutton');
 
 	temp1.addEventListener('click', function() {
+<<<<<<< Updated upstream
 		manual_press = true;
+=======
+	    manual_press = true;
+>>>>>>> Stashed changes
 		step();
 		manual_press=false;
 	}, false);
@@ -93,6 +114,8 @@ function initalize() {
 
 	createRandomizer();
 	
+	data = [];
+	
 	for(var i = 0; i < data_size;i++) {
 		data.push(i + 1);
 	}
@@ -109,6 +132,191 @@ function initalize() {
 	renderData();
 }
 
+
+function aestheticMode() {
+	if(aesthetic_on === true) {
+		aesthetic_on = false;
+		
+		var canvas = document.getElementById("screen");
+		
+		canvas.width = 854;
+		canvas.height = 480;
+		
+		initalize();
+		
+		if(aesthetic_mode_interval !== null) {
+			clearInterval(aesthetic_mode_interval);
+		}
+		document.getElementById("currentAlgo").style.display = "block";
+		document.getElementById("stepbutton").style.display = "initial";
+		document.getElementById("resetbutton").style.display = "initial";
+		document.getElementById("playbutton").style.display = "initial";
+		document.getElementById("color1input").style.display = "initial";
+		document.getElementById("color2input").style.display = "initial";
+		document.getElementById("radiobuttons").style.display = "initial";
+		
+		current_sorting_function = copy_current_sorting_function;
+		use_non_linear_gradiant = copy_use_non_linear_gradiant;
+		use_linear_gradiant = copy_use_linear_gradiant;
+		single_color = copy_single_color;
+		color_1 = copy_color_1;
+		color_2 = copy_color_2;
+		
+		document.getElementById("currentAlgo").textContent = sortName(current_sorting_function);
+		dataReset();
+		
+		if(single_color === true) {
+			document.getElementById("gradientnonlinearbutton").checked = false;
+			use_non_linear_gradiant = false;
+			document.getElementById("gradientlinearbutton").checked = false;
+			use_linear_gradiant = false;
+			document.getElementById("singlecolorbutton").checked = single_color;
+		}
+		if(use_linear_gradiant === true) {
+			document.getElementById("gradientnonlinearbutton").checked = false;
+			use_non_linear_gradiant = false;
+			document.getElementById("singlecolorbutton").checked = false;
+			single_color = false;
+			document.getElementById("gradientlinearbutton").checked = use_linear_gradiant;
+		}
+		if(use_non_linear_gradiant === true) {
+			document.getElementById("gradientlinearbutton").checked = false;
+			use_linear_gradiant = false;
+			document.getElementById("singlecolorbutton").checked = false;
+			single_color = false;
+			document.getElementById("gradientnonlinearbutton").checked = use_non_linear_gradiant;
+		}
+		
+		document.getElementById("color1input").value = color_1;
+		document.getElementById("color2input").value = color_2;
+	}
+	else {
+		document.getElementById("currentAlgo").style.display = "none";
+		document.getElementById("stepbutton").style.display = "none";
+		document.getElementById("resetbutton").style.display = "none";
+		document.getElementById("playbutton").style.display = "none";
+		document.getElementById("color1input").style.display = "none";
+		document.getElementById("color2input").style.display = "none";
+		document.getElementById("radiobuttons").style.display = "none";
+		
+		copy_current_sorting_function = current_sorting_function;
+		copy_use_non_linear_gradiant = use_non_linear_gradiant;
+		copy_use_linear_gradiant = copy_use_linear_gradiant;
+		copy_single_color = single_color;
+		copy_color_1 = color_1;
+		copy_color_2 = color_2;
+		
+		document.getElementById("color1input").value = copy_color_1;
+		document.getElementById("color2input").value = copy_color_2;
+		
+		aesthetic_on = true;
+		aestheticDone = true;
+		
+		var canvas = document.getElementById("screen");
+		
+		canvas.width = 1280;
+		canvas.height = 720;
+		
+		initalize();
+		
+		aesthetic_mode_interval = setInterval(runAesthetic, 7);
+	}
+}
+function runAesthetic() {
+	if(aestheticDone === true) {
+		if(aesthetic_reset_is_done !== true) {
+			steps_completed = 0;
+			data.sort(function(a, b){return b - a});
+			
+			aesthetic_reset_interval = setInterval(dataResetIterative, 7);
+		}
+		else {
+			clearInterval(aesthetic_reset_interval);
+			
+			current_sorting_function = chooseSortFromID(Math.floor(Math.random() * 5));
+			
+			switch(Math.floor(Math.random() * 3)) {
+				case 0: {
+					toggleSingleColor();
+					break;
+				}
+				case 1: {
+					toggleLinearGradientColor();
+					break;
+				}
+				case 2: {
+					toggleNonLinearGradientColor();
+					break;
+				}
+				default: {
+					break;
+				}
+			}
+			{
+				var r = (Math.floor(Math.random() * 256)).toString(16);
+				var g = (Math.floor(Math.random() * 256)).toString(16);
+				var b = (Math.floor(Math.random() * 256)).toString(16);
+				
+				if(r.length === 1) {
+					r = "0" + r;
+				}
+				if(g.length === 1) {
+					g = "0" + g;
+				}
+				if(b.length === 1) {
+					b = "0" + b;
+				}
+				var hex = "#" + r + g + b;
+				
+				color_1 = hex;
+				
+			}
+			{
+				var r = (Math.floor(Math.random() * 256)).toString(16);
+				var g = (Math.floor(Math.random() * 256)).toString(16);
+				var b = (Math.floor(Math.random() * 256)).toString(16);
+				
+				if(r.length === 1) {
+					r = "0" + r;
+				}
+				if(g.length === 1) {
+					g = "0" + g;
+				}
+				if(b.length === 1) {
+					b = "0" + b;
+				}
+				var hex = "#" + r + g + b;
+				
+				color_2 = hex;
+			}
+			
+			
+			if (step_sorted) {
+				speed = 10-((Math.floor(Math.random() * 7)) + 4);
+				if (speed==9) {
+					speed = speed*5
+				}
+				if (speed==8) {
+					speed = speed*3
+				}
+				step_interval = setInterval(step,(speed-4)*speed);
+				if (speed<=3) {
+					step_interval2 = setInterval(step,speed)
+				}
+				if (speed<=2) {
+					step_interval3 = setInterval(step,speed)
+				}
+				if (speed<=1) {
+					step_interval4 = setInterval(step,speed)
+				}
+				if (speed<=0) {
+					step_interval5 = setInterval(step,speed)
+				}
+			}
+			aestheticDone = false;
+		}
+	}
+}
 function checkPairs(pow2) {
 	if(data_size % pow2 === 0) {
 		var temp1 = 2;
@@ -222,6 +430,24 @@ function dataReset() {
 	//	clearInterval(step_interval)
 	//}
 }
+function dataResetIterative() {
+	if(aesthetic_completed_steps === 0) {
+		clearInterval(aesthetic_mode_interval);
+	}
+	for(var i = (aesthetic_completed_steps === 0 ? 0 : aesthetic_completed_steps - 1); i < randomizer_array.length;i++) {
+		var pair = randomizer_array[i];
+		var temp = data[pair.num1];
+		data[pair.num1] = data[pair.num2];
+		data[pair.num2] = temp;
+		aesthetic_completed_steps = aesthetic_completed_steps + 1;
+		break;
+	}
+	if(aesthetic_completed_steps === randomizer_array.length) {
+		aesthetic_reset_is_done = true;
+		aesthetic_completed_steps = 0;
+		runAesthetic();
+	}
+}
 // Changes sorting algorithm
 function changeSort(algorithm) {
 	current_sorting_function = algorithm.name;
@@ -283,6 +509,8 @@ function shellSort() {
 		shellSort_isInitialized = true;
 	}
 
+	// if (gap <= 0) return true; // done sorting
+
 	let swapsMade = 0;
     while (gap > 0 && swapsMade < steps) {
         if (shellSort_i < data.length) {
@@ -306,6 +534,8 @@ function shellSort() {
         }
     }
 	steps_completed += swapsMade;
+
+	return (gap <= 0 && swapsMade === 0);
 }
 
 // Temporary array for merge sort
@@ -350,6 +580,8 @@ function mergeSort() {
 		merge(data, start, mid, end);
 		mergesMade++;
 	}
+
+	return (mergeRanges.length === 0);
 }
 
 //Quicksort based on this link: //https://stackoverflow.com/questions/68524038/is-there-a-python-implementation-of-quicksort-without-recursion
@@ -560,39 +792,50 @@ function step() {
 	switch(current_sorting_function) {
 		case "selectionSort": {
 			selectionSort();
+			step_sorted = isSorted();
 			break;
 		}
 		case "insertionSort": {
 		    insertionSort();
+			step_sorted = isSorted();
 		    break;
 		}
 		case "shellSort": {
-			shellSort();
+			step_sorted = shellSort();
 			break;
         }
 		case "mergeSort": {
-			mergeSort();
+			step_sorted = mergeSort();
 			break;
 		}
 		case "quickSort": {
 		    quickSort();
+			step_sorted = isSorted();
 		    break;
-
 		}
 		default: {
 			break;
 		}
 	}
+<<<<<<< Updated upstream
 	if (manual_press!=true) {
 	    step_sorted = isSorted()
+=======
+	if (!manual_press) {
+	    step_sorted = isSorted();
+>>>>>>> Stashed changes
 	}
 	if (step_sorted) {
+		if(aesthetic_on === true) {
+			aestheticDone = true;
+		}
 	    clearInterval(step_interval)
 	    clearInterval(step_interval2)
 	    clearInterval(step_interval3)
 	    clearInterval(step_interval4)
 	    clearInterval(step_interval5)
 	}
+	manual_press = false
 	renderData();
 }
 function sortName() {
@@ -615,6 +858,34 @@ function sortName() {
 		}
 		case "quickSort": {
 		    return "Quick Sort";
+		    break;
+
+		}
+		default: {
+			break;
+		}
+	}
+}
+function chooseSortFromID(sort) {
+	switch(sort) {
+		case 0: {
+			return "selectionSort";
+			break;
+		}
+		case 1: {
+		    return "insertionSort";
+		    break;
+		}
+		case 2: {
+			return "shellSort";
+			break;
+        }
+		case 3: {
+			return "mergeSort";
+			break;
+		}
+		case 4: {
+		    return "quickSort";
 		    break;
 
 		}
