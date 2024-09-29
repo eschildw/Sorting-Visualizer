@@ -53,16 +53,24 @@ var step_interval5;
 var step_sorted = true;
 var manual_press = false;
 
-initalize();
+var educational_mode = false;
 
+
+{
+	var canvas = document.getElementById("screen");
+	initalize(canvas.width);
+}
 // Initalizes all data
-function initalize() {
+function initalize(size) {
 	document.getElementById("currentAlgo").textContent = sortName(current_sorting_function);
 	
 	var canvas = document.getElementById("screen");
 	canvas.style.background = backaround_color;
 	
-	data_size = canvas.width;
+	if(size % 2 !== 0) {
+		size = size + 1;
+	}
+	data_size = size;
 	
 	var temp1 = document.getElementById('stepbutton');
 
@@ -132,97 +140,99 @@ function initalize() {
 
 
 function aestheticMode() {
-	if(aesthetic_on === true) {
-		aesthetic_on = false;
-		
-		var canvas = document.getElementById("screen");
-		
-		canvas.width = 854;
-		canvas.height = 480;
-		
-		initalize();
-		
-		if(aesthetic_mode_interval !== null) {
-			clearInterval(aesthetic_mode_interval);
+	if(educational_mode === false) {
+		if(aesthetic_on === true) {
+			aesthetic_on = false;
+			
+			var canvas = document.getElementById("screen");
+			
+			canvas.width = 854;
+			canvas.height = 480;
+			
+			initalize(canvas.width);
+			
+			if(aesthetic_mode_interval !== null) {
+				clearInterval(aesthetic_mode_interval);
+			}
+			aesthetic_reset_is_done = false;
+			if(aesthetic_reset_interval !== null) {
+				clearInterval(aesthetic_reset_interval);
+				aesthetic_reset_interval = null;
+			}
+			document.getElementById("currentAlgo").style.display = "block";
+			document.getElementById("stepbutton").style.display = "initial";
+			document.getElementById("resetbutton").style.display = "initial";
+			document.getElementById("playbutton").style.display = "initial";
+			document.getElementById("color1input").style.display = "initial";
+			document.getElementById("color2input").style.display = "initial";
+			document.getElementById("radio-buttons").style.display = "initial";
+			
+			current_sorting_function = copy_current_sorting_function;
+			use_non_linear_gradiant = copy_use_non_linear_gradiant;
+			use_linear_gradiant = copy_use_linear_gradiant;
+			single_color = copy_single_color;
+			color_1 = copy_color_1;
+			color_2 = copy_color_2;
+			
+			document.getElementById("currentAlgo").textContent = sortName(current_sorting_function);
+			dataReset();
+			
+			if(single_color === true) {
+				document.getElementById("gradientnonlinearbutton").checked = false;
+				use_non_linear_gradiant = false;
+				document.getElementById("gradientlinearbutton").checked = false;
+				use_linear_gradiant = false;
+				document.getElementById("singlecolorbutton").checked = single_color;
+			}
+			if(use_linear_gradiant === true) {
+				document.getElementById("gradientnonlinearbutton").checked = false;
+				use_non_linear_gradiant = false;
+				document.getElementById("singlecolorbutton").checked = false;
+				single_color = false;
+				document.getElementById("gradientlinearbutton").checked = use_linear_gradiant;
+			}
+			if(use_non_linear_gradiant === true) {
+				document.getElementById("gradientlinearbutton").checked = false;
+				use_linear_gradiant = false;
+				document.getElementById("singlecolorbutton").checked = false;
+				single_color = false;
+				document.getElementById("gradientnonlinearbutton").checked = use_non_linear_gradiant;
+			}
+			
+			document.getElementById("color1input").value = color_1;
+			document.getElementById("color2input").value = color_2;
 		}
-		aesthetic_reset_is_done = false;
-		if(aesthetic_reset_interval !== null) {
-			clearInterval(aesthetic_reset_interval);
-			aesthetic_reset_interval = null;
-		}
-		document.getElementById("currentAlgo").style.display = "block";
-		document.getElementById("stepbutton").style.display = "initial";
-		document.getElementById("resetbutton").style.display = "initial";
-		document.getElementById("playbutton").style.display = "initial";
-		document.getElementById("color1input").style.display = "initial";
-		document.getElementById("color2input").style.display = "initial";
-		document.getElementById("radio-buttons").style.display = "initial";
-		
-		current_sorting_function = copy_current_sorting_function;
-		use_non_linear_gradiant = copy_use_non_linear_gradiant;
-		use_linear_gradiant = copy_use_linear_gradiant;
-		single_color = copy_single_color;
-		color_1 = copy_color_1;
-		color_2 = copy_color_2;
-		
-		document.getElementById("currentAlgo").textContent = sortName(current_sorting_function);
-		dataReset();
-		
-		if(single_color === true) {
-			document.getElementById("gradientnonlinearbutton").checked = false;
-			use_non_linear_gradiant = false;
-			document.getElementById("gradientlinearbutton").checked = false;
-			use_linear_gradiant = false;
-			document.getElementById("singlecolorbutton").checked = single_color;
-		}
-		if(use_linear_gradiant === true) {
-			document.getElementById("gradientnonlinearbutton").checked = false;
-			use_non_linear_gradiant = false;
-			document.getElementById("singlecolorbutton").checked = false;
-			single_color = false;
-			document.getElementById("gradientlinearbutton").checked = use_linear_gradiant;
-		}
-		if(use_non_linear_gradiant === true) {
-			document.getElementById("gradientlinearbutton").checked = false;
-			use_linear_gradiant = false;
-			document.getElementById("singlecolorbutton").checked = false;
-			single_color = false;
-			document.getElementById("gradientnonlinearbutton").checked = use_non_linear_gradiant;
-		}
-		
-		document.getElementById("color1input").value = color_1;
-		document.getElementById("color2input").value = color_2;
-	}
-	else {
-		document.getElementById("currentAlgo").style.display = "none";
-		document.getElementById("stepbutton").style.display = "none";
-		document.getElementById("resetbutton").style.display = "none";
-		document.getElementById("playbutton").style.display = "none";
-		document.getElementById("color1input").style.display = "none";
-		document.getElementById("color2input").style.display = "none";
-		document.getElementById("radio-buttons").style.display = "none";
+		else {
+			document.getElementById("currentAlgo").style.display = "none";
+			document.getElementById("stepbutton").style.display = "none";
+			document.getElementById("resetbutton").style.display = "none";
+			document.getElementById("playbutton").style.display = "none";
+			document.getElementById("color1input").style.display = "none";
+			document.getElementById("color2input").style.display = "none";
+			document.getElementById("radio-buttons").style.display = "none";
 
-		copy_current_sorting_function = current_sorting_function;
-		copy_use_non_linear_gradiant = use_non_linear_gradiant;
-		copy_use_linear_gradiant = copy_use_linear_gradiant;
-		copy_single_color = single_color;
-		copy_color_1 = color_1;
-		copy_color_2 = color_2;
-		
-		document.getElementById("color1input").value = copy_color_1;
-		document.getElementById("color2input").value = copy_color_2;
-		
-		aesthetic_on = true;
-		aestheticDone = true;
-		
-		var canvas = document.getElementById("screen");
-		
-		canvas.width = 1280;
-		canvas.height = 720;
-		
-		initalize();
-		
-		aesthetic_mode_interval = setInterval(runAesthetic, 7);
+			copy_current_sorting_function = current_sorting_function;
+			copy_use_non_linear_gradiant = use_non_linear_gradiant;
+			copy_use_linear_gradiant = copy_use_linear_gradiant;
+			copy_single_color = single_color;
+			copy_color_1 = color_1;
+			copy_color_2 = color_2;
+			
+			document.getElementById("color1input").value = copy_color_1;
+			document.getElementById("color2input").value = copy_color_2;
+			
+			aesthetic_on = true;
+			aestheticDone = true;
+			
+			var canvas = document.getElementById("screen");
+			
+			canvas.width = 1280;
+			canvas.height = 720;
+			
+			initalize(canvas.width);
+			
+			aesthetic_mode_interval = setInterval(runAesthetic, 7);
+		}
 	}
 }
 function runAesthetic() {
@@ -386,6 +396,8 @@ function createRandomizer() {
 	
 	var num1 = 0;
 	var num2 = 0;
+	
+	randomizer_array = [];
 	
 	while(counter < data_size) {
 		var number = Math.floor(Math.random() * data_size);
@@ -1013,5 +1025,21 @@ function exp25(value) {
 		value = 0;
 	}
 	return Math.pow(value, 5);
+}
+function resetSmallerRect() {
+	if(aesthetic_on === false) {
+		if(educational_mode === false) {
+			dataReset();
+			var canvas = document.getElementById("screen");
+			initalize(61);
+			educational_mode = true;
+		}
+		else {
+			dataReset();
+			var canvas = document.getElementById("screen");
+			educational_mode = false;
+			initalize(canvas.width);
+		}
+	}
 }
 
