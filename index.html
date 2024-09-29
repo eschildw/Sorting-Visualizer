@@ -75,7 +75,7 @@
 
 
         <!-- intro
-        ================================================== 480--> 
+        ================================================== --> 
         <section id="intro" class="s-intro">
 
 			<h3 id="currentAlgo" style="margin-left: 10%;">Text</h3>
@@ -95,9 +95,10 @@
                     <br>
                     <input id="singlecolorbutton" type="radio" onclick="toggleSingleColor();" checked> Use Single Color</button>
                     <br>
+                    Speed:
+                    <input type="range" class="slidecontainer" min="1" max="100" value="50" class="slider" id="speedSlider">
                 </div>
-                Speed:
-                <input type="range" class="slidecontainer" min="1" max="10" value="5" class="slider" id="speedSlider">
+                
 				<script src="sv.js"></script>
             </div>
 
@@ -113,7 +114,7 @@
                 <div class="row s-about__timeline" data-animate-block>
                     <div class="column lg-6 stack-on-900 s-about__timeline-section" data-animate-el>
     
-                        <h2 class="text-subtitle">
+                        <h2 class="text-subtitle" style="font-size:x-large">
                             Sorting Algorithms
                         </h2>
     
@@ -178,10 +179,6 @@
                     </div> <!-- end s-about__timeline-section -->
     
                     <div class="column lg-6 stack-on-900 s-about__timeline-section" data-animate-el>
-    
-                        <h2 class="text-subtitle">
-                           This text makes the boxes even.
-                        </h2> 
     
                         <div class="timeline">
     

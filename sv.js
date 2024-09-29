@@ -18,7 +18,7 @@ var steps_completed = 0;
 
 var is_sorted = false;
 // Current sorting algorithm
-var current_sorting_function = "mergeSort";
+var current_sorting_function = "insertionSort";
 
 
 // Screen Variables
@@ -43,11 +43,10 @@ initalize();
 
 // Initalizes all data
 function initalize() {
-	document.getElementById("currentAlgo").textContent = "Merge Sort";
+	document.getElementById("currentAlgo").textContent = "Insertion Sort";
 	
 	var canvas = document.getElementById("screen");
 	canvas.style.background = backaround_color;
-	var draw_context = canvas.getContext("2d");
 	
 	data_size = canvas.width;
 	
