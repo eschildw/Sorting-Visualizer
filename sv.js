@@ -281,6 +281,8 @@ function shellSort() {
 		shellSort_isInitialized = true;
 	}
 
+	// if (gap <= 0) return true; // done sorting
+
 	let swapsMade = 0;
     while (gap > 0 && swapsMade < steps) {
         if (shellSort_i < data.length) {
@@ -304,6 +306,8 @@ function shellSort() {
         }
     }
 	steps_completed += swapsMade;
+
+	return (gap <= 0 && swapsMade === 0);
 }
 
 // Temporary array for merge sort
@@ -348,6 +352,8 @@ function mergeSort() {
 		merge(data, start, mid, end);
 		mergesMade++;
 	}
+
+	return (mergeRanges.length === 0);
 }
 
 //Quicksort based on this link: //https://stackoverflow.com/questions/68524038/is-there-a-python-implementation-of-quicksort-without-recursion
@@ -558,24 +564,26 @@ function step() {
 	switch(current_sorting_function) {
 		case "selectionSort": {
 			selectionSort();
+			step_sorted = isSorted();
 			break;
 		}
 		case "insertionSort": {
 		    insertionSort();
+			step_sorted = isSorted();
 		    break;
 		}
 		case "shellSort": {
-			shellSort();
+			step_sorted = shellSort();
 			break;
         }
 		case "mergeSort": {
-			mergeSort();
+			step_sorted = mergeSort();
 			break;
 		}
 		case "quickSort": {
 		    quickSort();
+			step_sorted = isSorted();
 		    break;
-
 		}
 		default: {
 			break;
