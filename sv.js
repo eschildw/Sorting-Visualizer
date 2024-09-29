@@ -302,7 +302,6 @@ function mergeSort() {
 		merge(data, start, mid, end);
 		mergesMade++;
 	}
-	console.log("Just ran mergeSort()!");
 }
 
 //Quicksort based on this link: //https://stackoverflow.com/questions/68524038/is-there-a-python-implementation-of-quicksort-without-recursion
