@@ -156,8 +156,7 @@ function aestheticMode() {
 		document.getElementById("playbutton").style.display = "initial";
 		document.getElementById("color1input").style.display = "initial";
 		document.getElementById("color2input").style.display = "initial";
-		document.getElementById("radiobuttons").style.display = "initial";
-		document.getElementById("radiogroup").style.display = "initial";
+		document.getElementById("radio-buttons").style.display = "initial";
 		
 		current_sorting_function = copy_current_sorting_function;
 		use_non_linear_gradiant = copy_use_non_linear_gradiant;
@@ -201,9 +200,8 @@ function aestheticMode() {
 		document.getElementById("playbutton").style.display = "none";
 		document.getElementById("color1input").style.display = "none";
 		document.getElementById("color2input").style.display = "none";
-		document.getElementById("radiobuttons").style.display = "none";
-		document.getElementById("radiogroup").style.display = "none";
-		
+		document.getElementById("radio-buttons").style.display = "none";
+
 		copy_current_sorting_function = current_sorting_function;
 		copy_use_non_linear_gradiant = use_non_linear_gradiant;
 		copy_use_linear_gradiant = copy_use_linear_gradiant;

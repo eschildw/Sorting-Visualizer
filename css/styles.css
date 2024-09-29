@@ -2109,14 +2109,48 @@ select:-webkit-autofill:focus {
     color: black;
 }
 
-.slidecontainer {
-    width: 75%; /* Width of the outside container */
-}
-
 .radio-buttons {
     text-align: left;
     margin-left: 7%;
+    border-color: #383B43;
 }
+
+.slidecontainer {
+    width: 70%; /* Width of the outside container */
+}
+
+.slider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 25px; /* Specified height */
+    background: #d3d3d3; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+  }
+  
+  /* Mouse-over effects */
+  .slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+  }
+
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #383B43; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #383B43; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+  }
 
  .btn,
 button,
@@ -4183,145 +4217,6 @@ img.u-pull-left {
         width  : 1.6rem;
     }
 }
-
-/* CSS */
-.button-89 {
-  --b: 3px;   /* border thickness */
-  --s: .35em; /* size of the corner */
-  --color: #373B44;
-
-  padding: calc(var(--s)) calc(.9em + var(--s));
-  color: var(--color);
-  --_p: var(--s);
-  background:
-    conic-gradient(from 90deg at var(--b) var(--b),#0000 90deg,var(--color) 0)
-    var(--_p) var(--_p)/calc(100% - var(--b) - 2*var(--_p)) calc(100% - var(--b) - 2*var(--_p));
-  transition: .3s linear, color 0s, background-color 0s;
-  outline: var(--b) solid #0000;
-  outline-offset: .6em;
-  font-size: 16px;
-  align-text: top;
-
-
-
-  border: 0;
-
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-
-.button-89:hover,
-.button-89:focus-visible{
-  --_p: 0px;
-  outline-color: var(--color);
-  outline-offset: .05em;
-}
-
-.button-89:active {
-  background: var(--color);
-  color: #fff;
-}
-
-input[type="range"] {
-    /* To remove default styles appplied by webkit browsers */
-    -webkit-appearance: none;
-
-    width: 25em;
-    background: transparent;
-    position: relative;
-}
-
-input[type="range"]:focus {
-    /* To remove default (mostly blue) outline appplied by browsers on :focus */
-    outline: 0;
-}
-
-/* SLIDER THUMB -> represented by the orange ball in the design */
-/* Webkit based browsers (chrome, opera, ...) */
-input[type="range"]::-webkit-slider-thumb {
-     /* Removes the default styling */
-    -webkit-appearance: none;
-
-    width: 3em;
-    height: 3em;
-    margin: .5em 0;
-    background: hsl(27, 98%, 50%);
-    border-radius: 50%;
-
-    /* The inset shadow gives depth and makes the thumb look 3 dimensional and the other one shows a subtle effect of the shadow it creates because of the light source coming from the top left of the page */
-    box-shadow:
-                inset .8em .8em 5px -8px rgba(255, 255, 255, .4),
-                inset -.4em -.4em 10px -3px rgba(0,0,0,.2),
-                0.7em 0.5em 7px -0.5em rgba(0,0,0,.4);;
-
-    cursor: pointer;
-}
-
-/*All the same stuff for firefox */
-input[type=range]::-moz-range-thumb {
-    width: 3em;
-    height: 3em;
-    margin: .5em 0;
-    background: #fd8421;
-    border-radius: 50%;
-    box-shadow:
-                inset .8em .8em 5px -8px rgba(255, 255, 255, .4),
-                inset -.4em -.4em 10px -3px rgba(0,0,0,.2),
-                0.7em 0.5em 7px -0.5em rgba(0,0,0,.4);
-    cursor: pointer;
-    border: 0;
-}
-
-
-/* RUNNABLE TRACK -> represented by the indented carve in which the ball (thumb) moves */
-/* Webkit browsers */
-input[type="range"]::-webkit-slider-runnable-track {
-    background: transparent;
-    width: 50%;
-    height: 4em;
-    padding: 0 1em;
-    border-radius: 2em;
-
-    /* These shadow are what create the skeumorphic indent on the track. The first one is dark to show places in the indent that light don't reach and the second one shows places where light meets thereby creating the illusion of depth */
-    box-shadow:
-                inset .6em 1em 10px rgba(0,0,0,.15),
-                inset -.6em -1em 10px rgba(255, 255, 255, .415);
-}
-/* For firefox */
-input[type=range]::-moz-range-track {
-    background: transparent;
-    width: 50%;
-    height: 4em;
-    padding: 0 1em;
-    border-radius: 2em;
-    box-shadow:
-                inset .6em 1em 10px rgba(0,0,0,.15),
-                inset -.6em -1em 10px rgba(255, 255, 255, .415);
-}
-
-/* For the numbering in the range's design - doesn't show on firefox but shows on chrome and opera */
-input[type="range"]::before {
-    content: "0 1 2 3 4 5 6 7 8 9";
-    position: absolute;
-    text-align: center;
-    color: #c4c4c4;
-    font-size: 1em;
-
-    /*Serves to spread the letters to fit the whole width of the track */
-    letter-spacing: .65em;
-
-    top: 0; bottom: 0;
-    left: 0; right: 0;
-    padding: 1.6em;
-
-    /* Makes the letters look embossed adding to the skeumorphic theme of the design */
-    text-shadow: .5px .5px 0.9px rgba(0,0,0, .4);
-
-    z-index: -1;
-}
-
-
 
 .radiogroup {
   padding: 48px 64px;

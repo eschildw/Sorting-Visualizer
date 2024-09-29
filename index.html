@@ -33,7 +33,6 @@
 
 <body id="top">
 
-
     <!-- preloader 
     ================================================== -->
     <div id="preloader">
@@ -78,46 +77,23 @@
         <!-- intro
         ================================================== --> 
         <section id="intro" class="s-intro">
-
-
-
-			<h3 id="currentAlgo" style="margin-left: 10%;">Text</h3>
+        
+            <h3 id="currentAlgo" style="margin-left: 10%;">Text</h3>
 			<canvas id="screen" width="854" height="480" style="margin-left: 10%;border:1px solid #000000;float:left;"></canvas>
 			<div class="side-bar-top">
-				<button class="button-89" role="button" style="max-width:130px;text-align:center;float:left;" id="stepbutton">Step</button>
-				<button class="button-89" role="button" style="max-width:130px;text-align:center;float:right;" id="resetbutton">Reset</button>
-				<button class="button-89" role="button" style="max-width:120px;text-align:center;" id="playbutton">Play</button>
+				<button style="max-width:130px;text-align:center;float:left;" id="stepbutton">Step</button>
+				<button style="max-width:130px;text-align:center;float:right;" id="resetbutton">Reset</button>
+				<button style="max-width:120px;text-align:center;" id="playbutton">Play</button>
                 <br>
 				<input id="color1input" type="color" onchange="setColor1()" value="#11B8BB"></input>
 				<input id="color2input" type="color" onchange="setColor2()"></input>
                 <br>
-              <div id="radiogroup" class="radiogroup">
-			  <div class="wrapper">
-				<input class="state" id="gradientlinearbutton" type="radio" value="a" onclick="toggleLinearGradientColor();" checked></button>
-				<label class="label" for="gradientlinearbutton">
-				  <div class="indicator"></div>
-				  <span class="text">Linear Gradient</span>
-				</label>
-			  </div>
-			  <div class="wrapper">
-				<input class="state" type="radio" name="app" value="b" id="gradientnonlinearbutton" onclick="toggleNonLinearGradientColor();">
-				<label class="label" for="gradientnonlinearbutton">
-				  <div class="indicator"></div>
-				  <span class="text">Non-Linear Gradient</span>
-				</label>
-			  </div>
-			  <div class="wrapper">
-				<input class="state" name="app" id="singlecolorbutton" type="radio" onclick="toggleSingleColor();" value="c">
-				<label class="label" for="singlecolorbutton">
-				  <div class="indicator"></div>
-				  <span class="text">Single Color</span>
-				</label>
-			  </div>
-			</div>
-            <div class="radio-buttons">
-                <div id="radiobuttons" class="radio-buttons">
+                <div id="radio-buttons" class="radio-buttons">
                     <input id="gradientlinearbutton" type="radio" onclick="toggleLinearGradientColor();"> Use Linear Gradient</button>
                     <br>
+                    <input id="gradientnonlinearbutton" type="radio" onclick="toggleNonLinearGradientColor();"> Use Non-Linear Gradient</button>
+                    <br>
+                    <input id="singlecolorbutton" type="radio" onclick="toggleSingleColor();" checked> Use Single Color</button>
                     <br>
                     Speed:
                     <input type="range" class="slidecontainer" min="1" max="10" value="5" class="slider" id="speedSlider">
@@ -125,7 +101,6 @@
                 
 				<script src="js/sv.js"></script>
             </div>
-
         </section> <!-- end s-intro -->
 
 
