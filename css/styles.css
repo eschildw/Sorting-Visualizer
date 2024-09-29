@@ -2092,7 +2092,11 @@ select:-webkit-autofill:focus {
  *
  *
  * ------------------------------------------------------------------- */
-.btn,
+ .slidecontainer {
+    width: 25%; /* Width of the outside container */
+  }
+
+ .btn,
 button,
 input[type="submit"],
 input[type="reset"],
@@ -3336,7 +3340,7 @@ img.u-pull-left {
     --timeline-top-adjust          : calc(var(--subtitle-line-height) / 2);
     --timeline-vertical-border-pos : 8px;
 
-    padding-top                    : var(--vspace-5);
+    padding-top                    : 50px;
     padding-bottom                 : 0;
 }
 
