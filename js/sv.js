@@ -131,6 +131,36 @@ function initalize() {
 }
 
 
+function speed() {
+    alert('test')
+	clearInterval(step_interval);
+	clearInterval(step_interval2);
+    clearInterval(step_interval3);
+	clearInterval(step_interval4);
+	clearInterval(step_interval5);
+	speed = 10-document.getElementById('speedSlider').value;
+	alert(speed);
+	if (speed==9) {
+	    speed = speed*5;
+	}
+	if (speed==8) {
+	    speed = speed*3;
+	}
+	step_interval = setInterval(step,(speed-4)*speed);
+	if (speed<=3) {
+	    step_interval2 = setInterval(step,speed);
+	}
+	if (speed<=2) {
+	    step_interval3 = setInterval(step,speed);
+	}
+	if (speed<=1) {
+	    step_interval4 = setInterval(step,speed);
+	}
+	if (speed<=0) {
+	    step_interval5 = setInterval(step,speed);
+	}
+}
+
 function aestheticMode() {
 	if(aesthetic_on === true) {
 		aesthetic_on = false;
@@ -341,6 +371,36 @@ function checkPairs(pow2) {
 		return true;
 	}
 	return true;
+}
+
+function adjustSpeed() {
+    if(step_sorted!=true) {
+	clearInterval(step_interval);
+	clearInterval(step_interval2);
+    clearInterval(step_interval3);
+	clearInterval(step_interval4);
+	clearInterval(step_interval5);
+	speed = 10-document.getElementById('speedSlider').value;
+	if (speed==9) {
+	    speed = speed*5;
+	}
+	if (speed==8) {
+	    speed = speed*3;
+	}
+	step_interval = setInterval(step,(speed-4)*speed);
+	if (speed<=3) {
+	    step_interval2 = setInterval(step,speed);
+	}
+	if (speed<=2) {
+	    step_interval3 = setInterval(step,speed);
+	}
+	if (speed<=1) {
+	    step_interval4 = setInterval(step,speed);
+	}
+	if (speed<=0) {
+	    step_interval5 = setInterval(step,speed);
+	}
+    }
 }
 
 function isSorted() {
