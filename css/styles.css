@@ -3337,7 +3337,7 @@ img.u-pull-left {
     --timeline-vertical-border-pos : 8px;
 
     padding-top                    : var(--vspace-5);
-    padding-bottom                 : var(--vspace-3);
+    padding-bottom                 : 0;
 }
 
 .s-about__block {
@@ -3984,7 +3984,7 @@ img.u-pull-left {
  *
  * ------------------------------------------------------------------- */
 .s-footer {
-    padding-top    : calc(6 * var(--space));
+    padding-top    : 0;
     padding-bottom : var(--vspace-2_5);
     font-weight    : 300;
     position       : relative;
