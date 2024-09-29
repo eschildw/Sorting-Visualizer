@@ -135,7 +135,7 @@
 									</h4>
                                 </div>
                                 <div class="timeline__desc">
-                                    <p>Insertion sort creates new elements that are not related to the data set and randomly inserts them, thus confusing many people who study the set.</p>
+                                    <p>Insertion sort takes each element an inserts it into the already-sorted part of the array at the bottom of it.</p>
                                     <code style="display:block; white-space:pre-wrap">
 function insertionSort(arr) {
     let n = arr.length;
@@ -167,7 +167,7 @@ function insertionSort(arr) {
 									</h4>
                                 </div>
                                 <div class="timeline__desc">
-                                    <p>Quick sort is the slowest sort ever offered, approximately O(100000N^2).</p>
+                                    <p>The idea of quicksort is to partition the array around a pivot i such that all the elements from 0 to i are less than the element at i, and all the elements after i are greater than it. Then, it does this to the left half and the right half recursively, until the array is sorted.</p>
                                     <code style="display:block; white-space:pre-wrap">
 function partition(arr,l,h) {
     let i = l - 1;
@@ -208,7 +208,7 @@ function quicksort(arr, low = 0, high = arr.length - 1) {
 									</h4>
                                 </div>
                                 <div class="timeline__desc">
-                                    <p>Merge sort chooses another random data set and merges the values with yours. Good luck distinguishing your important numbers from the incoming cat temperature values!</p>
+                                    <p>An array of length 1 is sorted by definition. Merge sort merges these into one array of length 2; then, it merges 2 arrays of length 2 into one array of length 4; and so on.</p>
                                     <code style="display:block; white-space:pre-wrap">
 function mergeSort(arr) {
     let n = arr.length;
@@ -261,7 +261,7 @@ function merge(data, temp, start, mid, end) {
 									</h4>
                                 </div>
                                 <div class="timeline__desc">
-                                    <p>Selection sort selects its favorite elements and discards the rest. Who needs them, anyway?</p>
+                                    <p>Selection sort selects the minimum element in the unsorted part of the array, and swaps it so it goes to the end of the sorted part.</p>
                                     <code style="display:block; white-space:pre-wrap">
 function selectionSort(arr) {
     for (let i = 0; i < arr.length; i++) {
@@ -293,7 +293,7 @@ function selectionSort(arr) {
 									</h4>
                                 </div>
                                 <div class="timeline__desc">
-                                    <p>Shell sort puts the elements into crabs' shells and hopes that the crabs put them in order.</p>
+                                    <p>Shell sort compares and swaps far-apart elements in early stages, so that later stages don't have to as much work to do sorting.</p>
                                     <code style="display:block; white-space:pre-wrap">
 function shellSort(data) {
     let gap = data.length;
