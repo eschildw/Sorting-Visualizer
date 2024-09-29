@@ -41,7 +41,7 @@ var copy_color_2 = "";
 var aesthetic_on = false;
 var aesthetic_mode_interval;
 var aestheticDone = true;
-var aesthetic_reset_interval;
+var aesthetic_reset_interval = null;
 var aesthetic_reset_is_done = false;
 var aesthetic_completed_steps = 0;
 
@@ -52,10 +52,6 @@ var step_interval4;
 var step_interval5;
 var step_sorted = true;
 var manual_press = false;
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 
 initalize();
 
@@ -71,11 +67,8 @@ function initalize() {
 	var temp1 = document.getElementById('stepbutton');
 
 	temp1.addEventListener('click', function() {
-<<<<<<< Updated upstream
 		manual_press = true;
-=======
-	    manual_press = true;
->>>>>>> Stashed changes
+
 		step();
 		manual_press=false;
 	}, false);
@@ -89,6 +82,11 @@ function initalize() {
 	temp1 = document.getElementById('playbutton');
 	temp1.addEventListener('click', function() {
 	    if (step_sorted) {
+			clearInterval(step_interval);
+			clearInterval(step_interval2);
+			clearInterval(step_interval3);
+			clearInterval(step_interval4);
+			clearInterval(step_interval5);
 	        speed = 10-document.getElementById('speedSlider').value
 	        if (speed==9) {
 	            speed = speed*5
@@ -147,6 +145,11 @@ function aestheticMode() {
 		if(aesthetic_mode_interval !== null) {
 			clearInterval(aesthetic_mode_interval);
 		}
+		aesthetic_reset_is_done = false;
+		if(aesthetic_reset_interval !== null) {
+			clearInterval(aesthetic_reset_interval);
+			aesthetic_reset_interval = null;
+		}
 		document.getElementById("currentAlgo").style.display = "block";
 		document.getElementById("stepbutton").style.display = "initial";
 		document.getElementById("resetbutton").style.display = "initial";
@@ -154,6 +157,7 @@ function aestheticMode() {
 		document.getElementById("color1input").style.display = "initial";
 		document.getElementById("color2input").style.display = "initial";
 		document.getElementById("radiobuttons").style.display = "initial";
+		document.getElementById("radiogroup").style.display = "initial";
 		
 		current_sorting_function = copy_current_sorting_function;
 		use_non_linear_gradiant = copy_use_non_linear_gradiant;
@@ -198,6 +202,7 @@ function aestheticMode() {
 		document.getElementById("color1input").style.display = "none";
 		document.getElementById("color2input").style.display = "none";
 		document.getElementById("radiobuttons").style.display = "none";
+		document.getElementById("radiogroup").style.display = "none";
 		
 		copy_current_sorting_function = current_sorting_function;
 		copy_use_non_linear_gradiant = use_non_linear_gradiant;
@@ -225,13 +230,15 @@ function aestheticMode() {
 function runAesthetic() {
 	if(aestheticDone === true) {
 		if(aesthetic_reset_is_done !== true) {
-			steps_completed = 0;
-			data.sort(function(a, b){return b - a});
-			
-			aesthetic_reset_interval = setInterval(dataResetIterative, 7);
+			if(aesthetic_reset_interval === null) {
+				dataResetNoRand();
+				aesthetic_reset_interval = setInterval(dataResetIterative, 7);
+			}
 		}
 		else {
+			aesthetic_reset_is_done = false;
 			clearInterval(aesthetic_reset_interval);
+			aesthetic_reset_interval = null;
 			
 			current_sorting_function = chooseSortFromID(Math.floor(Math.random() * 5));
 			
@@ -430,9 +437,28 @@ function dataReset() {
 	//	clearInterval(step_interval)
 	//}
 }
+function dataResetNoRand() {
+	steps_completed = 0;
+	data.sort(function(a, b){return a - b});
+	//Will trigger quicksort reset
+	size = -1;
+	renderData();
+	//Resets speed and sort lock
+	clearInterval(step_interval)
+	clearInterval(step_interval2)
+	clearInterval(step_interval3)
+	clearInterval(step_interval4)
+	clearInterval(step_interval5)
+	step_sorted = true
+
+	mergeSort_isInitiated = shellSort_isInitialized = false;
+	//if(step_interval) {
+	//	clearInterval(step_interval)
+	//}
+}
 function dataResetIterative() {
 	if(aesthetic_completed_steps === 0) {
-		clearInterval(aesthetic_mode_interval);
+		//clearInterval(aesthetic_mode_interval);
 	}
 	for(var i = (aesthetic_completed_steps === 0 ? 0 : aesthetic_completed_steps - 1); i < randomizer_array.length;i++) {
 		var pair = randomizer_array[i];
@@ -440,12 +466,12 @@ function dataResetIterative() {
 		data[pair.num1] = data[pair.num2];
 		data[pair.num2] = temp;
 		aesthetic_completed_steps = aesthetic_completed_steps + 1;
+		renderData();
 		break;
 	}
 	if(aesthetic_completed_steps === randomizer_array.length) {
 		aesthetic_reset_is_done = true;
 		aesthetic_completed_steps = 0;
-		runAesthetic();
 	}
 }
 // Changes sorting algorithm
@@ -817,13 +843,8 @@ function step() {
 			break;
 		}
 	}
-<<<<<<< Updated upstream
 	if (manual_press!=true) {
 	    step_sorted = isSorted()
-=======
-	if (!manual_press) {
-	    step_sorted = isSorted();
->>>>>>> Stashed changes
 	}
 	if (step_sorted) {
 		if(aesthetic_on === true) {
