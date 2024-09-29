@@ -2110,7 +2110,7 @@ select:-webkit-autofill:focus {
 }
 
 .slidecontainer {
-    width: 50%; /* Width of the outside container */
+    width: 75%; /* Width of the outside container */
 }
 
 .radio-buttons {
