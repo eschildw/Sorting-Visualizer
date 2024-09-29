@@ -67,6 +67,7 @@ function initalize() {
 	var temp1 = document.getElementById('stepbutton');
 
 	temp1.addEventListener('click', function() {
+<<<<<<< HEAD
 		manual_press = true;
 
 		step();
@@ -845,6 +846,10 @@ function step() {
 	}
 	if (manual_press!=true) {
 	    step_sorted = isSorted()
+=======
+	if (!manual_press) {
+	    step_sorted = isSorted();
+>>>>>>> 7542a95627377c325f8965df16bd3fe7b55771a4
 	}
 	if (step_sorted) {
 		if(aesthetic_on === true) {
