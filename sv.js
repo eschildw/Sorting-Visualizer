@@ -148,6 +148,16 @@ function isSorted() {
 	}
 	return true;
 }
+function percentSorted() {
+	var counter = 0;
+	
+	for(var i = 1; i < data_size;i++) {
+		if(data[i - 1] > data[i]) {
+			counter = counter + 1;
+		}
+	}
+	return 1 - (counter / data_size);
+}
 
 // Creates the randomizer array
 function createRandomizer() {
@@ -490,15 +500,26 @@ function renderData() {
 				var fcolor1 = [Number("0x" + color_1.charAt(1) +  color_1.charAt(2)), Number("0x" + color_1.charAt(3) +  color_1.charAt(4)), Number("0x" + color_1.charAt(5) +  color_1.charAt(6))];
 				var fcolor2 = [Number("0x" + color_2.charAt(1) +  color_2.charAt(2)), Number("0x" + color_2.charAt(3) +  color_2.charAt(4)), Number("0x" + color_2.charAt(5) +  color_2.charAt(6))];
 				
+				var percent = percentSorted();
+				
+				if(percent > 0.5) {
+					percent = (percent - 0.5) * 2;
+				}
+				else {
+					percent = (percent / 2) + exp25(percent);
+				}
+				
 				var diff1 = ((fcolor2[0] - fcolor1[0]) / data_size);
 				var diff2 = ((fcolor2[1] - fcolor1[1]) / data_size);
 				var diff3 = ((fcolor2[2] - fcolor1[2]) / data_size);
 				for(var i = 0; i < data_size;i++) {
-					var progress = i / data_size;
-					progress = nonLinearize(progress);
-					var r = Math.floor((fcolor1[0] + ((diff1 * i) * progress))).toString(16);
-					var g = Math.floor((fcolor1[1] + ((diff2 * i) * progress))).toString(16);
-					var b = Math.floor((fcolor1[2] + ((diff3 * i) * progress))).toString(16);
+					var progress = (i + ((1 + i) * exp25(percent) * 10000)) / 100;
+					if(progress >= data_size) {
+						progress = data_size - 1;
+					}
+					var r = Math.floor((fcolor1[0] + (diff1 * progress))).toString(16);
+					var g = Math.floor((fcolor1[1] + (diff2 * progress))).toString(16);
+					var b = Math.floor((fcolor1[2] + (diff3 * progress))).toString(16);
 					
 					if(r.length === 1) {
 						r = "0" + r;
@@ -688,5 +709,14 @@ function nonLinearize(value) {
 		value = 0;
 	}
 	return Math.pow(Math.sin(Math.PI * value * 0.5), 6);
+}
+function exp25(value) {
+	if(value > 1) {
+		value = 1;
+	}
+	if(value < 0) {
+		value = 0;
+	}
+	return Math.pow(value, 5);
 }
 
