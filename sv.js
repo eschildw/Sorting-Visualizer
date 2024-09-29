@@ -37,7 +37,7 @@ var step_interval3;
 var step_interval4;
 var step_interval5;
 var step_sorted = true;
-
+var manual_press = false;
 
 initalize();
 
@@ -53,6 +53,7 @@ function initalize() {
 	var temp1 = document.getElementById('stepbutton');
 
 	temp1.addEventListener('click', function() {
+	    manual_press = true;
 		step();
 	}, false);
 
@@ -580,7 +581,9 @@ function step() {
 			break;
 		}
 	}
-	step_sorted = isSorted()
+	if (!manual_press) {
+	    step_sorted = isSorted();
+	}
 	if (step_sorted) {
 	    clearInterval(step_interval)
 	    clearInterval(step_interval2)
@@ -588,6 +591,7 @@ function step() {
 	    clearInterval(step_interval4)
 	    clearInterval(step_interval5)
 	}
+	manual_press = false
 	renderData();
 }
 function sortName() {
