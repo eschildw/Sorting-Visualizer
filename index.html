@@ -223,21 +223,17 @@ function mergeSort(arr) {
 }
 
 function merge(data, temp, start, mid, end) {
-	let left = start;
-	let right = mid;
-	let tmpIdx = start;
-	while (left < mid && right < end) {
-		temp[tmpIdx++] = data[data[left] <= data[right]? left++: right++];
-	}
-	while (left < mid) {
-		temp[tmpIdx++] = data[left++];
-	}
-	while (right < end) {
-		temp[tmpIdx++] = data[right++];
-	}
-	for (let i = start; i < end; i++) {
-		data[i] = mergeSortTempData[i];
-	}
+    let left = start;
+    let right = mid;
+    let tmpIdx = start;
+    while (left < mid && right < end)
+        temp[tmpIdx++] = data[data[left] <= data[right]? left++: right++];
+    while (left < mid)
+        temp[tmpIdx++] = data[left++];
+	while (right < end)
+        temp[tmpIdx++] = data[right++];
+	for (let i = start; i < end; i++)
+        data[i] = temp[i];
 }
                                     </code>
                                 </div>
