@@ -22,18 +22,18 @@ var current_sorting_function = "insertionSort";
 
 
 // Screen Variables
-var backaround_color = "white";
+var background_color = "white";
 
 var color_1 = "#000000";
 var color_2 = "#000000";
 
-var use_non_linear_gradiant = false;
-var use_linear_gradiant = false;
+var use_non_linear_gradient = false;
+var use_linear_gradient = false;
 var single_color = true;
 
 var copy_current_sorting_function = "";
-var copy_use_non_linear_gradiant = false;
-var copy_use_linear_gradiant = false;
+var copy_use_non_linear_gradient = false;
+var copy_use_linear_gradient = false;
 var copy_single_color = false;
 var copy_color_1 = "";
 var copy_color_2 = "";
@@ -65,7 +65,7 @@ function initalize(size) {
 	document.getElementById("currentAlgo").textContent = sortName(current_sorting_function);
 	
 	var canvas = document.getElementById("screen");
-	canvas.style.background = backaround_color;
+	canvas.style.background = background_color;
 	
 	if(size % 2 !== 0) {
 		size = size + 1;
@@ -138,6 +138,36 @@ function initalize(size) {
 	renderData();
 }
 
+
+function speed() {
+    alert('test')
+	clearInterval(step_interval);
+	clearInterval(step_interval2);
+    clearInterval(step_interval3);
+	clearInterval(step_interval4);
+	clearInterval(step_interval5);
+	speed = 10-document.getElementById('speedSlider').value;
+	alert(speed);
+	if (speed==9) {
+	    speed = speed*5;
+	}
+	if (speed==8) {
+	    speed = speed*3;
+	}
+	step_interval = setInterval(step,(speed-4)*speed);
+	if (speed<=3) {
+	    step_interval2 = setInterval(step,speed);
+	}
+	if (speed<=2) {
+	    step_interval3 = setInterval(step,speed);
+	}
+	if (speed<=1) {
+	    step_interval4 = setInterval(step,speed);
+	}
+	if (speed<=0) {
+	    step_interval5 = setInterval(step,speed);
+	}
+}
 
 function aestheticMode() {
 	if(educational_mode === false) {
@@ -351,6 +381,36 @@ function checkPairs(pow2) {
 		return true;
 	}
 	return true;
+}
+
+function adjustSpeed() {
+    if(step_sorted!=true) {
+	clearInterval(step_interval);
+	clearInterval(step_interval2);
+    clearInterval(step_interval3);
+	clearInterval(step_interval4);
+	clearInterval(step_interval5);
+	speed = 10-document.getElementById('speedSlider').value;
+	if (speed==9) {
+	    speed = speed*5;
+	}
+	if (speed==8) {
+	    speed = speed*3;
+	}
+	step_interval = setInterval(step,(speed-4)*speed);
+	if (speed<=3) {
+	    step_interval2 = setInterval(step,speed);
+	}
+	if (speed<=2) {
+	    step_interval3 = setInterval(step,speed);
+	}
+	if (speed<=1) {
+	    step_interval4 = setInterval(step,speed);
+	}
+	if (speed<=0) {
+	    step_interval5 = setInterval(step,speed);
+	}
+    }
 }
 
 function isSorted() {
@@ -713,7 +773,7 @@ function quickSortIterative(arr,l,h) {
 // Clears the sorting screen
 function clearScreen() {
 	var canvas = document.getElementById("screen");
-	canvas.style.background = backaround_color;
+	canvas.style.background = background_color;
 	var draw_context = canvas.getContext("2d");
 	
 	draw_context.clearRect(0, 0, canvas.width, canvas.height);
@@ -725,10 +785,10 @@ function renderData() {
 	clearScreen();
 	
 	var canvas = document.getElementById("screen");
-	canvas.style.background = backaround_color;
+	canvas.style.background = background_color;
 	var draw_context = canvas.getContext("2d");
 	
-	if(use_linear_gradiant === false && single_color === false && use_non_linear_gradiant === false) {
+	if(use_linear_gradient === false && single_color === false && use_non_linear_gradient === false) {
 		draw_context.fillStyle = "green";
 		
 		for(var i = 0; i < data_size;i++) {
@@ -737,7 +797,7 @@ function renderData() {
 		}
 	}
 	else {
-		if(use_linear_gradiant === true) {
+		if(use_linear_gradient === true) {
 			var fcolor1 = [Number("0x" + color_1.charAt(1) +  color_1.charAt(2)), Number("0x" + color_1.charAt(3) +  color_1.charAt(4)), Number("0x" + color_1.charAt(5) +  color_1.charAt(6))];
 			var fcolor2 = [Number("0x" + color_2.charAt(1) +  color_2.charAt(2)), Number("0x" + color_2.charAt(3) +  color_2.charAt(4)), Number("0x" + color_2.charAt(5) +  color_2.charAt(6))];
 			
@@ -767,7 +827,7 @@ function renderData() {
 			}
 		}
 		else {
-			if(use_non_linear_gradiant === true) {
+			if(use_non_linear_gradient === true) {
 				var fcolor1 = [Number("0x" + color_1.charAt(1) +  color_1.charAt(2)), Number("0x" + color_1.charAt(3) +  color_1.charAt(4)), Number("0x" + color_1.charAt(5) +  color_1.charAt(6))];
 				var fcolor2 = [Number("0x" + color_2.charAt(1) +  color_2.charAt(2)), Number("0x" + color_2.charAt(3) +  color_2.charAt(4)), Number("0x" + color_2.charAt(5) +  color_2.charAt(6))];
 				
@@ -933,59 +993,59 @@ function fullSpeedSort() {
 	renderData();
 }
 function toggleSingleColor() {
-	if(use_linear_gradiant === true || use_non_linear_gradiant === true) {
+	if(use_linear_gradient === true || use_non_linear_gradient === true) {
 		single_color = true;
 	}
 	
 	document.getElementById("singlecolorbutton").checked = single_color;
 	
-	if(use_linear_gradiant === true) {
+	if(use_linear_gradient === true) {
 		document.getElementById("gradientlinearbutton").checked = false;
-		use_linear_gradiant = false;
+		use_linear_gradient = false;
 	}
-	if(use_non_linear_gradiant === true) {
+	if(use_non_linear_gradient === true) {
 		document.getElementById("gradientnonlinearbutton").checked = false;
-		use_non_linear_gradiant = false;
+		use_non_linear_gradient = false;
 	}
 	
 	renderData();
 }
 function toggleLinearGradientColor() {
-	use_linear_gradiant = !use_linear_gradiant;
+	use_linear_gradient = !use_linear_gradient;
 	
-	document.getElementById("gradientlinearbutton").checked = use_linear_gradiant;
+	document.getElementById("gradientlinearbutton").checked = use_linear_gradient;
 	
 	if(single_color === true) {
 		document.getElementById("singlecolorbutton").checked = false;
 		single_color = false;
 	}
-	if(use_linear_gradiant === false) {
+	if(use_linear_gradient === false) {
 		document.getElementById("singlecolorbutton").checked = true;
 		single_color = true;
 	}
-	if(use_non_linear_gradiant === true) {
+	if(use_non_linear_gradient === true) {
 		document.getElementById("gradientnonlinearbutton").checked = false;
-		use_non_linear_gradiant = false;
+		use_non_linear_gradient = false;
 	}
 	
 	renderData();
 }
 function toggleNonLinearGradientColor() {
-	use_non_linear_gradiant = !use_non_linear_gradiant;
+	use_non_linear_gradient = !use_non_linear_gradient;
 	
-	document.getElementById("gradientnonlinearbutton").checked = use_non_linear_gradiant;
+	document.getElementById("gradientnonlinearbutton").checked = use_non_linear_gradient;
 	
 	if(single_color === true) {
 		document.getElementById("singlecolorbutton").checked = false;
 		single_color = false;
 	}
-	if(use_non_linear_gradiant === false) {
+	if(use_non_linear_gradient === false) {
 		document.getElementById("singlecolorbutton").checked = true;
 		single_color = true;
 	}
-	if(use_linear_gradiant === true) {
+	if(use_linear_gradient === true) {
 		document.getElementById("gradientlinearbutton").checked = false;
-		use_linear_gradiant = false;
+		use_linear_gradient = false;
 	}
 	
 	renderData();
