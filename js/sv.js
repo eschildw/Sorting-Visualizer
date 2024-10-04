@@ -27,13 +27,13 @@ var background_color = "white";
 var color_1 = "#000000";
 var color_2 = "#000000";
 
-var use_non_linear_gradiant = false;
-var use_linear_gradiant = false;
+var use_non_linear_gradient = false;
+var use_linear_gradient = false;
 var single_color = true;
 
 var copy_current_sorting_function = "";
-var copy_use_non_linear_gradiant = false;
-var copy_use_linear_gradiant = false;
+var copy_use_non_linear_gradient = false;
+var copy_use_linear_gradient = false;
 var copy_single_color = false;
 var copy_color_1 = "";
 var copy_color_2 = "";
@@ -169,68 +169,78 @@ function speed() {
 	}
 }
 
+function turnOffAesthetic() {
+	aesthetic_on = false;
+
+	var canvas = document.getElementById("screen");
+
+	canvas.width = 854;
+	canvas.height = 480;
+
+	initalize(canvas.width);
+
+	if (aesthetic_mode_interval !== null) {
+		clearInterval(aesthetic_mode_interval);
+	}
+	aesthetic_reset_is_done = false;
+	if (aesthetic_reset_interval !== null) {
+		clearInterval(aesthetic_reset_interval);
+		aesthetic_reset_interval = null;
+	}
+	document.getElementById("currentAlgo").style.display = "block";
+	document.getElementById("stepbutton").style.display = "initial";
+	document.getElementById("resetbutton").style.display = "initial";
+	document.getElementById("playbutton").style.display = "initial";
+	document.getElementById("color1input").style.display = "initial";
+	document.getElementById("color2input").style.display = "initial";
+	document.getElementById("radio-buttons").style.display = "initial";
+
+	current_sorting_function = copy_current_sorting_function;
+	use_non_linear_gradient = copy_use_non_linear_gradient;
+	use_linear_gradient = copy_use_linear_gradient;
+	single_color = copy_single_color;
+	color_1 = copy_color_1;
+	color_2 = copy_color_2;
+
+	document.getElementById("currentAlgo").textContent = sortName(current_sorting_function);
+	dataReset();
+
+	if (single_color === true) {
+		document.getElementById("gradientnonlinearbutton").checked = false;
+		use_non_linear_gradient = false;
+		document.getElementById("gradientlinearbutton").checked = false;
+		use_linear_gradient = false;
+		document.getElementById("singlecolorbutton").checked = single_color;
+	}
+	if (use_linear_gradient === true) {
+		document.getElementById("gradientnonlinearbutton").checked = false;
+		use_non_linear_gradient = false;
+		document.getElementById("singlecolorbutton").checked = false;
+		single_color = false;
+		document.getElementById("gradientlinearbutton").checked = use_linear_gradient;
+	}
+	if (use_non_linear_gradient === true) {
+		document.getElementById("gradientlinearbutton").checked = false;
+		use_linear_gradient = false;
+		document.getElementById("singlecolorbutton").checked = false;
+		single_color = false;
+		document.getElementById("gradientnonlinearbutton").checked = use_non_linear_gradient;
+	}
+
+	document.getElementById("color1input").value = color_1;
+	document.getElementById("color2input").value = color_2;
+}
+
 function aestheticMode() {
+	if(educational_mode === true) {
+		dataReset();
+		var canvas = document.getElementById("screen");
+		educational_mode = false;
+		initalize(canvas.width);
+	}
 	if(educational_mode === false) {
 		if(aesthetic_on === true) {
-			aesthetic_on = false;
-			
-			var canvas = document.getElementById("screen");
-			
-			canvas.width = 854;
-			canvas.height = 480;
-			
-			initalize(canvas.width);
-			
-			if(aesthetic_mode_interval !== null) {
-				clearInterval(aesthetic_mode_interval);
-			}
-			aesthetic_reset_is_done = false;
-			if(aesthetic_reset_interval !== null) {
-				clearInterval(aesthetic_reset_interval);
-				aesthetic_reset_interval = null;
-			}
-			document.getElementById("currentAlgo").style.display = "block";
-			document.getElementById("stepbutton").style.display = "initial";
-			document.getElementById("resetbutton").style.display = "initial";
-			document.getElementById("playbutton").style.display = "initial";
-			document.getElementById("color1input").style.display = "initial";
-			document.getElementById("color2input").style.display = "initial";
-			document.getElementById("radio-buttons").style.display = "initial";
-			
-			current_sorting_function = copy_current_sorting_function;
-			use_non_linear_gradiant = copy_use_non_linear_gradiant;
-			use_linear_gradiant = copy_use_linear_gradiant;
-			single_color = copy_single_color;
-			color_1 = copy_color_1;
-			color_2 = copy_color_2;
-			
-			document.getElementById("currentAlgo").textContent = sortName(current_sorting_function);
-			dataReset();
-			
-			if(single_color === true) {
-				document.getElementById("gradientnonlinearbutton").checked = false;
-				use_non_linear_gradiant = false;
-				document.getElementById("gradientlinearbutton").checked = false;
-				use_linear_gradiant = false;
-				document.getElementById("singlecolorbutton").checked = single_color;
-			}
-			if(use_linear_gradiant === true) {
-				document.getElementById("gradientnonlinearbutton").checked = false;
-				use_non_linear_gradiant = false;
-				document.getElementById("singlecolorbutton").checked = false;
-				single_color = false;
-				document.getElementById("gradientlinearbutton").checked = use_linear_gradiant;
-			}
-			if(use_non_linear_gradiant === true) {
-				document.getElementById("gradientlinearbutton").checked = false;
-				use_linear_gradiant = false;
-				document.getElementById("singlecolorbutton").checked = false;
-				single_color = false;
-				document.getElementById("gradientnonlinearbutton").checked = use_non_linear_gradiant;
-			}
-			
-			document.getElementById("color1input").value = color_1;
-			document.getElementById("color2input").value = color_2;
+			turnOffAesthetic();
 		}
 		else {
 			document.getElementById("currentAlgo").style.display = "none";
@@ -242,8 +252,8 @@ function aestheticMode() {
 			document.getElementById("radio-buttons").style.display = "none";
 
 			copy_current_sorting_function = current_sorting_function;
-			copy_use_non_linear_gradiant = use_non_linear_gradiant;
-			copy_use_linear_gradiant = copy_use_linear_gradiant;
+			copy_use_non_linear_gradient = use_non_linear_gradient;
+			copy_use_linear_gradient = copy_use_linear_gradient;
 			copy_single_color = single_color;
 			copy_color_1 = color_1;
 			copy_color_2 = color_2;
@@ -265,6 +275,7 @@ function aestheticMode() {
 		}
 	}
 }
+
 function runAesthetic() {
 	if(aestheticDone === true) {
 		if(aesthetic_reset_is_done !== true) {
@@ -788,7 +799,7 @@ function renderData() {
 	canvas.style.background = background_color;
 	var draw_context = canvas.getContext("2d");
 	
-	if(use_linear_gradiant === false && single_color === false && use_non_linear_gradiant === false) {
+	if(use_linear_gradient === false && single_color === false && use_non_linear_gradient === false) {
 		draw_context.fillStyle = "green";
 		
 		for(var i = 0; i < data_size;i++) {
@@ -797,7 +808,7 @@ function renderData() {
 		}
 	}
 	else {
-		if(use_linear_gradiant === true) {
+		if(use_linear_gradient === true) {
 			var fcolor1 = [Number("0x" + color_1.charAt(1) +  color_1.charAt(2)), Number("0x" + color_1.charAt(3) +  color_1.charAt(4)), Number("0x" + color_1.charAt(5) +  color_1.charAt(6))];
 			var fcolor2 = [Number("0x" + color_2.charAt(1) +  color_2.charAt(2)), Number("0x" + color_2.charAt(3) +  color_2.charAt(4)), Number("0x" + color_2.charAt(5) +  color_2.charAt(6))];
 			
@@ -827,7 +838,7 @@ function renderData() {
 			}
 		}
 		else {
-			if(use_non_linear_gradiant === true) {
+			if(use_non_linear_gradient === true) {
 				var fcolor1 = [Number("0x" + color_1.charAt(1) +  color_1.charAt(2)), Number("0x" + color_1.charAt(3) +  color_1.charAt(4)), Number("0x" + color_1.charAt(5) +  color_1.charAt(6))];
 				var fcolor2 = [Number("0x" + color_2.charAt(1) +  color_2.charAt(2)), Number("0x" + color_2.charAt(3) +  color_2.charAt(4)), Number("0x" + color_2.charAt(5) +  color_2.charAt(6))];
 				
@@ -993,59 +1004,59 @@ function fullSpeedSort() {
 	renderData();
 }
 function toggleSingleColor() {
-	if(use_linear_gradiant === true || use_non_linear_gradiant === true) {
+	if(use_linear_gradient === true || use_non_linear_gradient === true) {
 		single_color = true;
 	}
 	
 	document.getElementById("singlecolorbutton").checked = single_color;
 	
-	if(use_linear_gradiant === true) {
+	if(use_linear_gradient === true) {
 		document.getElementById("gradientlinearbutton").checked = false;
-		use_linear_gradiant = false;
+		use_linear_gradient = false;
 	}
-	if(use_non_linear_gradiant === true) {
+	if(use_non_linear_gradient === true) {
 		document.getElementById("gradientnonlinearbutton").checked = false;
-		use_non_linear_gradiant = false;
+		use_non_linear_gradient = false;
 	}
 	
 	renderData();
 }
 function toggleLinearGradientColor() {
-	use_linear_gradiant = !use_linear_gradiant;
+	use_linear_gradient = !use_linear_gradient;
 	
-	document.getElementById("gradientlinearbutton").checked = use_linear_gradiant;
+	document.getElementById("gradientlinearbutton").checked = use_linear_gradient;
 	
 	if(single_color === true) {
 		document.getElementById("singlecolorbutton").checked = false;
 		single_color = false;
 	}
-	if(use_linear_gradiant === false) {
+	if(use_linear_gradient === false) {
 		document.getElementById("singlecolorbutton").checked = true;
 		single_color = true;
 	}
-	if(use_non_linear_gradiant === true) {
+	if(use_non_linear_gradient === true) {
 		document.getElementById("gradientnonlinearbutton").checked = false;
-		use_non_linear_gradiant = false;
+		use_non_linear_gradient = false;
 	}
 	
 	renderData();
 }
 function toggleNonLinearGradientColor() {
-	use_non_linear_gradiant = !use_non_linear_gradiant;
+	use_non_linear_gradient = !use_non_linear_gradient;
 	
-	document.getElementById("gradientnonlinearbutton").checked = use_non_linear_gradiant;
+	document.getElementById("gradientnonlinearbutton").checked = use_non_linear_gradient;
 	
 	if(single_color === true) {
 		document.getElementById("singlecolorbutton").checked = false;
 		single_color = false;
 	}
-	if(use_non_linear_gradiant === false) {
+	if(use_non_linear_gradient === false) {
 		document.getElementById("singlecolorbutton").checked = true;
 		single_color = true;
 	}
-	if(use_linear_gradiant === true) {
+	if(use_linear_gradient === true) {
 		document.getElementById("gradientlinearbutton").checked = false;
-		use_linear_gradiant = false;
+		use_linear_gradient = false;
 	}
 	
 	renderData();
@@ -1086,7 +1097,12 @@ function exp25(value) {
 	}
 	return Math.pow(value, 5);
 }
+
 function resetSmallerRect() {
+	if(aesthetic_on === true) {
+		turnOffAesthetic();
+	}
+
 	if(aesthetic_on === false) {
 		if(educational_mode === false) {
 			dataReset();
