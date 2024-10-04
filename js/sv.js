@@ -193,7 +193,7 @@ function turnOffAesthetic() {
 	document.getElementById("playbutton").style.display = "initial";
 	document.getElementById("color1input").style.display = "initial";
 	document.getElementById("color2input").style.display = "initial";
-	document.getElementById("radio-buttons").style.display = "initial";
+	document.getElementById("radio-buttons").style.display = "inherit";
 
 	current_sorting_function = copy_current_sorting_function;
 	use_non_linear_gradient = copy_use_non_linear_gradient;
